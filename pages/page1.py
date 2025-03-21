@@ -5,17 +5,17 @@ import base64
 
 st.title("Welcome to CO653 - Loan-EM")
 
-st.subheader("Project Overview")
+st.header("Project Overview")
 st.write(
     "We are developing this system as part of our coursework for CO653, where we are required to build a system using either a neural network or fuzzy logic. "
     "However, we decided to implement both approaches to compare their performance."
 )
 
-st.subheader("Team Members")
+st.header("Team Members")
 st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
 st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
-st.subheader("Dataset")
+st.header("Dataset")
 st.write(
     "For our dataset, we found one from a hackathon, which we are utilising to train and evaluate our models. "
     "While our primary goal is to complete the coursework assignment, we are also using the hackathon as an opportunity to review our model's score on the leaderboard,"
