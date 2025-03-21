@@ -12,10 +12,10 @@ st.write(
     "However, we decided to implement both approaches to compare their performance."
 )
 st.markdown("---")
-container1 = st.container(border=True)
-container1.header("Team Members")
-container1.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
-container1.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
+
+st.header("Team Members")
+st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
+st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
 st.markdown("---")
 st.header("Dataset")
