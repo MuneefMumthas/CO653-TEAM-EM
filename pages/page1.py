@@ -121,7 +121,8 @@ test_df = pd.DataFrame(
                     "Loan amount in thousands", "Term of loan in months", 
                     "Credit history meets guidelines", "Urban/ Semi Urban/ Rural"
                 ]
-        }, index=[0]
+        }, 
+        index=pd.Index(range(1, 13))
     )
     
 st.dataframe(test_df, height=458)
