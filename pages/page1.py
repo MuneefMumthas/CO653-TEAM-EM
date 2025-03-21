@@ -60,27 +60,26 @@ st.download_button(
     icon=":material/download:",
 )
 
-st.write(
-    pd.DataFrame(
-    {
-        "Variable": [
-            "Loan_ID", "Gender", "Married", "Dependents", "Education", 
-            "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
-            "LoanAmount", "Loan_Amount_Term", "Credit_History", 
-            "Property_Area", "Loan_Status"
-        ],
-        "Description": [
-            "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
-            "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
-            "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
-            "Loan amount in thousands", "Term of loan in months", 
-            "Credit history meets guidelines", "Urban/ Semi Urban/ Rural", 
-            "(Target) Loan approved (Y/N)"
-        ]
-    }
-    )
+train_df = pd.DataFrame(
+            {
+                "Variable": [
+                    "Loan_ID", "Gender", "Married", "Dependents", "Education", 
+                    "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
+                    "LoanAmount", "Loan_Amount_Term", "Credit_History", 
+                    "Property_Area", "Loan_Status"
+                ],
+                "Description": [
+                    "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
+                    "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
+                    "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
+                    "Loan amount in thousands", "Term of loan in months", 
+                    "Credit history meets guidelines", "Urban/ Semi Urban/ Rural", 
+                    "(Target) Loan approved (Y/N)"
+                ]
+            }, index=pd.Index(range(1, 14))
+            )
     
-    )
+st.dataframe(train_df, height=494)
 
 st.subheader("Test file:", anchor=False)
 st.write("CSV containing the customer information for whom loan eligibility is to be predicted")
