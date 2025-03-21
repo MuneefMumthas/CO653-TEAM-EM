@@ -28,7 +28,8 @@ st.markdown("---")
 st.header("About the Hackathon")
 st.write(
     "[Analytics Vidhya Loan Prediction Challenge](https://www.analyticsvidhya.com/datahack/contest/practice-problem-loan-prediction-iii/). "
-    ""
+)
+st.write(
     "Participants must build a model to predict loan approval based on applicant details. "
     "Evaluation is based on **accuracy**, and top models will be featured on the leaderboard."
 )
