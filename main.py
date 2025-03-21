@@ -46,7 +46,7 @@ pg = st.navigation(
     }
 )
 
-st.sidebar.header("Team Members")
+st.sidebar.header("Team Members", text_align="center")
 st.sidebar.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
 st.sidebar.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
