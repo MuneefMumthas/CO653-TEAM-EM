@@ -79,7 +79,7 @@ train_df = pd.DataFrame(
             }, index=pd.Index(range(1, 14))
             )
     
-st.dataframe(train_df, height=494)
+st.dataframe(train_df, height=493)
 
 st.subheader("Test file:", anchor=False)
 st.write("CSV containing the customer information for whom loan eligibility is to be predicted")
