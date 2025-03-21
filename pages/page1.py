@@ -8,14 +8,14 @@ import base64
 st.title("Welcome to CO653 - Loan-EM", anchor=False)
 
 st.markdown("---")
-st.header("Introduction")
+st.header("Introduction", anchor=False)
 st.write(
     "We are developing this system as part of our coursework for CO653, where we are required to build a system using either a neural network or fuzzy logic. "
     "However, we decided to implement both approaches to compare their performance."
 )
 
 st.markdown("---")
-st.header("Dataset")
+st.header("Dataset", anchor=False)
 st.write(
     "For our dataset, we found one from a hackathon, which we are utilising to train and evaluate our models. "
     "While our primary goal is to complete the coursework assignment, we are also using the hackathon as an opportunity to review our model's score on the leaderboard,"
@@ -23,7 +23,7 @@ st.write(
 )
 
 st.markdown("---")
-st.header("About the Hackathon")
+st.header("About the Hackathon", anchor=False)
 st.write(
     "[Analytics Vidhya Loan Prediction Challenge.](https://www.analyticsvidhya.com/datahack/contest/practice-problem-loan-prediction-iii/) "
 )
@@ -33,9 +33,9 @@ st.write(
 )
 
 st.markdown("---")
-st.header("Data Dictionary")
+st.header("Data Dictionary", anchor=False)
 
-st.subheader("Train file: ")
+st.subheader("Train file: ", anchor=False)
 st.write("CSV containing the customers for whom loan eligibility is known as 'Loan_Status'")
 
 
@@ -82,7 +82,7 @@ st.write(
     
     )
 
-st.subheader("Test file:")
+st.subheader("Test file:", anchor=False)
 st.write("CSV containing the customer information for whom loan eligibility is to be predicted")
 
 #dowload button for test file
