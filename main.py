@@ -46,10 +46,12 @@ pg = st.navigation(
     }
 )
 
-st.header("Team Members")
-st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
-st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
 #st.logo("assets/logo_longer_white.png",icon_image="assets/logo.png", size= "large")
 
 pg.run()
+
+st.header("Team Members")
+st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
+st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
+
