@@ -4,33 +4,8 @@ import numpy as np
 import time
 import base64
 
-st.html(
-    body="""
-        <style>
-            /* hide hyperlink anchors generated next to headers */
-            h1 > div > a {
-                display: none !important;
-            }
-            h2 > div > a {
-                display: none !important;
-            }
-            h3 > div > a {
-                display: none !important;
-            }
-            h4 > div > a {
-                display: none !important;
-            }
-            h5 > div > a {
-                display: none !important;
-            }
-            h6 > div > a {
-                display: none !important;
-            }
-        </style>
-    """,
-)
 
-st.title("Welcome to CO653 - Loan-EM")
+st.title("Welcome to CO653 - Loan-EM", anchor=False)
 
 st.markdown("---")
 st.header("Introduction")
