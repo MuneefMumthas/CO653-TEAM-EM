@@ -106,24 +106,23 @@ st.download_button(
     icon=":material/download:",
 )
 
-st.write(
-    pd.DataFrame(
-    {
-        "Variable": [
-            "Loan_ID", "Gender", "Married", "Dependents", "Education", 
-            "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
-            "LoanAmount", "Loan_Amount_Term", "Credit_History", 
-            "Property_Area"
-        ],
-        "Description": [
-            "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
-            "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
-            "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
-            "Loan amount in thousands", "Term of loan in months", 
-            "Credit history meets guidelines", "Urban/ Semi Urban/ Rural"
-        ]
-    }
+test_df = pd.DataFrame(
+            {
+                "Variable": [
+                    "Loan_ID", "Gender", "Married", "Dependents", "Education", 
+                    "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
+                    "LoanAmount", "Loan_Amount_Term", "Credit_History", 
+                    "Property_Area"
+                ],
+                "Description": [
+                    "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
+                    "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
+                    "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
+                    "Loan amount in thousands", "Term of loan in months", 
+                    "Credit history meets guidelines", "Urban/ Semi Urban/ Rural"
+                ]
+        }
     )
     
-    )
+st.dataframe(test_df)
                      
