@@ -14,7 +14,7 @@ st.set_page_config(
 
 home_page = st.Page(
     page = "pages/page1.py",
-    title= "Home Page",
+    title= "Project Overview",
     icon = "🏠"
 )
 

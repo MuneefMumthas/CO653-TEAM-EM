@@ -8,7 +8,7 @@ import base64
 st.title("Welcome to CO653 - Loan-EM")
 
 st.markdown("---")
-st.header("Project Overview")
+st.header("Introduction")
 st.write(
     "We are developing this system as part of our coursework for CO653, where we are required to build a system using either a neural network or fuzzy logic. "
     "However, we decided to implement both approaches to compare their performance."
