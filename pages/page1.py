@@ -46,9 +46,9 @@ st.subheader("Train file: CSV containing the customers for whom loan eligibility
 #dowload button for train file
 @st.cache_data
 def get_data():
-    return pd.read_csv("data/Loan_test.csv")
+    return pd.read_csv("data/Loan_train.csv")
 
-# Convert DataFrame to CSV for download
+#convert DataFrame to CSV for download
 @st.cache_data
 def convert_for_download(df):
     return df.to_csv(index=False).encode("utf-8")
@@ -57,9 +57,9 @@ df = get_data()
 csv = convert_for_download(df)
 
 st.download_button(
-    label="Download Train CSV",
+    label="Download Train Dataset CSV",
     data=csv,
-    file_name="data.csv",
+    file_name="Loan_train.csv",
     mime="text/csv",
     icon=":material/download:",
 )
