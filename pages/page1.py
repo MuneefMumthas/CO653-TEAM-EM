@@ -10,7 +10,7 @@ st.write(
     "We are developing this system as part of our coursework for CO653, where we are required to build a system using either a neural network or fuzzy logic. "
     "However, we decided to implement both approaches to compare their performance."
 )
-
+st.markdown("---")
 st.header("Team Members")
 st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
 st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
@@ -24,6 +24,7 @@ st.write(
 st.header("About the Hackathon")
 st.write(
     "[Analytics Vidhya Loan Prediction Challenge](https://www.analyticsvidhya.com/datahack/contest/practice-problem-loan-prediction-iii/). "
+    ""
     "Participants must build a model to predict loan approval based on applicant details. "
     "Evaluation is based on **accuracy**, and top models will be featured on the leaderboard."
 )
