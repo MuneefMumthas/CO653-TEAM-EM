@@ -1,7 +1,9 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import time
 import base64
+
 
 st.title("Welcome to CO653 - Loan-EM")
 
@@ -39,6 +41,29 @@ st.markdown("---")
 st.header("Data Dictionary")
 
 st.subheader("Train file: CSV containing the customers for whom loan eligibility is known as 'Loan_Status'")
+
+
+#dowload button for train file
+@st.cache_data
+def get_data():
+    return pd.read_csv("data/Loan_test.csv")
+
+# Convert DataFrame to CSV for download
+@st.cache_data
+def convert_for_download(df):
+    return df.to_csv(index=False).encode("utf-8")
+
+df = get_data()
+csv = convert_for_download(df)
+
+st.download_button(
+    label="Download Train CSV",
+    data=csv,
+    file_name="data.csv",
+    mime="text/csv",
+    icon=":material/download:",
+)
+
 st.write(
     pd.DataFrame(
     {
