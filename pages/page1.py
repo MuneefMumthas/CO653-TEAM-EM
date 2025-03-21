@@ -62,13 +62,13 @@ st.download_button(
 
 train_df = pd.DataFrame(
             {
-                "Variable": [
+                "**Variable**": [
                     "Loan_ID", "Gender", "Married", "Dependents", "Education", 
                     "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
                     "LoanAmount", "Loan_Amount_Term", "Credit_History", 
                     "Property_Area", "Loan_Status"
                 ],
-                "Description": [
+                "**Description**": [
                     "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
                     "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
                     "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
@@ -107,13 +107,13 @@ st.download_button(
 
 test_df = pd.DataFrame(
             {
-                "Variable": [
+                "**Variable**": [
                     "Loan_ID", "Gender", "Married", "Dependents", "Education", 
                     "Self_Employed", "ApplicantIncome", "CoapplicantIncome", 
                     "LoanAmount", "Loan_Amount_Term", "Credit_History", 
                     "Property_Area"
                 ],
-                "Description": [
+                "**Description**": [
                     "Unique Loan ID", "Male/ Female", "Applicant married (Y/N)", 
                     "Number of dependents", "Applicant Education (Graduate/ Under Graduate)", 
                     "Self employed (Y/N)", "Applicant income", "Coapplicant income", 
