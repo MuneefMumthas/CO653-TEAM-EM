@@ -124,5 +124,5 @@ test_df = pd.DataFrame(
         }
     )
     
-st.dataframe(test_df, height=458.8)
+st.dataframe(test_df, height=458)
                      
