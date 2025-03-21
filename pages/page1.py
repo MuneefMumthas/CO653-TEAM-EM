@@ -20,10 +20,13 @@ st.write(
     "Our methodology involves first training the neural network to its optimal performance."
     "Once the neural network has been trained, we will review the importance scores assigned to the various inputs during the training process." 
     "These importance scores help us identify which features have the most influence on the model's predictions."
-
+)
+st.write(
 "Using the information from the importance scores, we will then create rules for the fuzzy logic system. These rules will be designed to align with the decision-making process of the neural network, "
 "enabling the fuzzy logic system to approximate the neural network's behaviour. At the same time, the fuzzy logic component will handle uncertainty and imprecision in the input data."
+)
 
+st.write(
 "By combining the neural network and fuzzy logic, we aim to create a robust hybrid model that leverages the learning capabilities of the neural network and the interpretability of fuzzy logic, resulting in a more adaptable and effective solution."
 
 )
