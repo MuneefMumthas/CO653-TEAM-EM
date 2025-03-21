@@ -41,12 +41,14 @@ outcome = st.Page(
 pg = st.navigation(
     {
         "Info": [home_page],
-        "Main Logics":[nn,fuzzy],
-        "Boring Stuff": [outcome]
+        "Models":[nn,fuzzy],
+        "Comparison": [outcome]
     }
 )
 
-
+st.header("Team Members")
+st.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
+st.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
 #st.logo("assets/logo_longer_white.png",icon_image="assets/logo.png", size= "large")
 
