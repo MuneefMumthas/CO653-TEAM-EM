@@ -3,7 +3,7 @@ import pandas as pd
 import time
 import base64
 
-st.title("Welcome to CO653 - Loan-EM", anchor="center")
+st.title("Welcome to CO653 - Loan-EM")
 
 st.header("Project Overview")
 st.write(
