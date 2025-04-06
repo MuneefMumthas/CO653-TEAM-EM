@@ -7,3 +7,4 @@ seaborn
 tensorflow
 streamlit-option-menu
 pandas-datareader
+category_encoders
