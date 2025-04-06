@@ -9,10 +9,10 @@ from sklearn.preprocessing import LabelEncoder
 
 
 #Loading the saved objects
-model = tf.keras.models.load_model("pkl/best_model.h5")
-mestimate_encoder_ = joblib.load("pkl/mestimate_encoder.pkl")
-minmax_scaler = joblib.load("pkl/minmax_scaler.pkl")
-label_encoder = joblib.load("pkl/label_encoder.pkl")
+model = tf.keras.models.load_model("pages/pkl/best_model.h5")
+mestimate_encoder_ = joblib.load("pages/pkl/mestimate_encoder.pkl")
+minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
+label_encoder = joblib.load("pages/pkl/label_encoder.pkl")
 
 st.title("Neural Network 🧠")
 
