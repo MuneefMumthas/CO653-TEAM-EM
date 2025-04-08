@@ -113,30 +113,30 @@ if submit_btn:
     st.session_state.test_input = pd.DataFrame([user_input])
     st.session_state.test_submitted = True
 
-    if st.session_state.test_submitted:
-        st.subheader("Test Input Row:")
-        st.dataframe(st.session_state.test_input)
+if st.session_state.test_submitted:
+    st.subheader("Test Input Row:")
+    st.dataframe(st.session_state.test_input)
 
-        if st.button("Encode:"):
-            # Encode only when button is clicked
-            encoded_df = mestimate_encoder.transform(st.session_state.test_input.copy())
+    if st.button("Encode:"):
+        # Encode only when button is clicked
+        encoded_df = mestimate_encoder.transform(st.session_state.test_input.copy())
 
-            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
-                            'Loan_Amount_Term', 'Credit_History', 'Dependents',
-                            'TotalIncome', 'Loan_Income_Ratio']
+        numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
+                        'Loan_Amount_Term', 'Credit_History', 'Dependents',
+                        'TotalIncome', 'Loan_Income_Ratio']
 
-            for col in numeric_cols:
-                encoded_df[col] = st.session_state.test_input[col]
+        for col in numeric_cols:
+            encoded_df[col] = st.session_state.test_input[col]
 
-            encoded_scaled = minmax_scaler.transform(encoded_df)
+        encoded_scaled = minmax_scaler.transform(encoded_df)
 
-            # Save to session state
-            st.session_state.encoded_data = encoded_scaled
+        # Save to session state
+        st.session_state.encoded_data = encoded_scaled
 
-        # Always display if already encoded
-        if "encoded_data" in st.session_state:
-            st.subheader("Encoded and Scaled Data:")
-            st.dataframe(st.session_state.encoded_data)
+    # Always display if already encoded
+    if "encoded_data" in st.session_state:
+        st.subheader("Encoded and Scaled Data:")
+        st.dataframe(st.session_state.encoded_data)
             
 
             
