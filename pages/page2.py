@@ -76,35 +76,38 @@ if submit_btn:
     if missing_fields:
         st.error(f"Please select the required field(s): {', '.join(missing_fields)}", icon="🚨")
         st.toast("💔")
-    elif zero_numbers:
+        st.stop()  
+
+    if zero_numbers:
         st.error(f"Income value needs to be greater than zero: {', '.join(zero_numbers)}", icon="🚨")
         st.toast("💔")
-    else:
-        total_income = applicant_income + coapplicant_income
-        loan_income_ratio = loan_amount / total_income
+        st.stop()  
 
-        # Handle label adjustment
-        credit_value = 1.0 if credit_history == "Good" else 0.0
+    # ✅ Valid inputs - proceed to build the test input
+    total_income = applicant_income + coapplicant_income
+    loan_income_ratio = loan_amount / total_income
+    credit_value = 1.0 if credit_history == "Good" else 0.0
 
-        user_input = {
-            "Gender": gender,
-            "Married": married,
-            "Dependents": dependents,
-            "Education": education,
-            "Self_Employed": self_employed,
-            "ApplicantIncome": applicant_income,
-            "CoapplicantIncome": coapplicant_income,
-            "LoanAmount": loan_amount,
-            "Loan_Amount_Term": loan_term,
-            "Credit_History": credit_value,
-            "Property_Area": property_area,
-            "TotalIncome": total_income,
-            "Loan_Income_Ratio": loan_income_ratio
-        }
+    user_input = {
+        "Gender": gender,
+        "Married": married,
+        "Dependents": dependents,
+        "Education": education,
+        "Self_Employed": self_employed,
+        "ApplicantIncome": applicant_income,
+        "CoapplicantIncome": coapplicant_income,
+        "LoanAmount": loan_amount,
+        "Loan_Amount_Term": loan_term,
+        "Credit_History": credit_value,
+        "Property_Area": property_area,
+        "TotalIncome": total_income,
+        "Loan_Income_Ratio": loan_income_ratio
+    }
 
-        st.session_state.test_input = pd.DataFrame([user_input])
-        st.session_state.test_submitted = True
-        
+    # 🚀 Store only valid data
+    st.session_state.test_input = pd.DataFrame([user_input])
+    st.session_state.test_submitted = True
+
     if st.session_state.test_submitted:
         st.subheader("Test Input Row:")
         st.dataframe(st.session_state.test_input)
