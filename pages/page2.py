@@ -109,22 +109,22 @@ if submit_btn:
         st.session_state.test_input = pd.DataFrame([user_input])
         st.session_state.test_submitted = True
 
-if st.session_state.test_submitted:
-    st.subheader("Test Input Row:")
-    st.dataframe(st.session_state.test_input)
+    if st.session_state.test_submitted:
+        st.subheader("Test Input Row:")
+        st.dataframe(st.session_state.test_input)
 
-    if st.button("Encode:"):
-        # Apply encoder
-        encoded_df = mestimate_encoder.transform(st.session_state.test_input)
+        if st.button("Encode:"):
+            # Apply encoder
+            encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-        # Combine with numeric fields
-        numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
-        encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
+            # Combine with numeric fields
+            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
+            encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
 
-        # Make sure all columns are in right order
-        encoded_scaled = minmax_scaler.transform(encoded_df)
+            # Make sure all columns are in right order
+            encoded_scaled = minmax_scaler.transform(encoded_df)
 
-        st.dataframe(encoded_scaled)
+            st.dataframe(encoded_scaled)
             
 
             
