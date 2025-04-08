@@ -121,27 +121,29 @@ if st.session_state.test_submitted:
         try:
             input_df = st.session_state.test_input.copy()
 
-            # Columns you trained encoders on
+            # ✅ Define column groups
             categorical_cols = ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'Property_Area']
             numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
                             'Loan_Amount_Term', 'Credit_History', 'TotalIncome', 'Loan_Income_Ratio']
 
-            # Step 1: Encode only categorical columns
+            # ✅ Encode categorical columns
             encoded_cats = mestimate_encoder.transform(input_df[categorical_cols])
-            st.subheader("✅ Encoded Categorical Columns:")
-            st.dataframe(encoded_cats)
+            st.write("✅ Encoded categorical columns shape:", encoded_cats.shape)
 
-            # Step 2: Combine encoded categorical data with numeric columns
-            final_input = pd.concat([encoded_cats.reset_index(drop=True), input_df[numeric_cols].reset_index(drop=True)], axis=1)
+            # ✅ Numeric columns
+            numeric_df = input_df[numeric_cols].copy()
+            st.write("✅ Numeric columns shape:", numeric_df.shape)
 
-            st.subheader("📊 Combined Data Before Scaling:")
-            st.dataframe(final_input)
+            # ✅ Combine
+            combined_df = pd.concat([encoded_cats.reset_index(drop=True), numeric_df.reset_index(drop=True)], axis=1)
+            st.write("✅ Combined input shape (before scaling):", combined_df.shape)
+            st.dataframe(combined_df)
 
-            # Step 3: Scale the full input
-            encoded_scaled = minmax_scaler.transform(final_input)
-            scaled_df = pd.DataFrame(encoded_scaled, columns=final_input.columns)
+            # ✅ Scale
+            encoded_scaled = minmax_scaler.transform(combined_df)
+            scaled_df = pd.DataFrame(encoded_scaled, columns=combined_df.columns)
 
-            # Store and show
+            # ✅ Store in session state
             st.session_state.encoded_data = encoded_scaled
             st.subheader("🎯 Encoded and Scaled Final Input")
             st.dataframe(scaled_df)
