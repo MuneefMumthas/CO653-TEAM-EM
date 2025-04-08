@@ -112,18 +112,26 @@ if submit_btn:
         st.subheader("Test Input Row:")
         st.dataframe(st.session_state.test_input)
 
+        if "encoded_data" not in st.session_state:
+            st.session_state.encoded_data = None
+
         if st.button("Encode:"):
-            # Apply encoder
             encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-            # Combine with numeric fields
-            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
+            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
+                            'Loan_Amount_Term', 'Credit_History', 'Dependents',
+                            'TotalIncome', 'Loan_Income_Ratio']
+
             encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
 
-            # Make sure all columns are in right order
             encoded_scaled = minmax_scaler.transform(encoded_df)
 
-            st.dataframe(encoded_scaled)
+            st.session_state.encoded_data = encoded_scaled
+
+        # Show encoded dataframe if it exists
+        if st.session_state.encoded_data is not None:
+            st.subheader("Encoded and Scaled Data:")
+            st.dataframe(st.session_state.encoded_data)
             
 
             
