@@ -121,14 +121,10 @@ if submit_btn:
             numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
             encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
 
+            # Make sure all columns are in right order
+            encoded_scaled = minmax_scaler.transform(encoded_df)
+
+            st.dataframe(encoded_scaled)
             
-
-            st.dataframe(encoded_df)
-
-            if st.button("Scale:"):
-                encoded_scaled = minmax_scaler.transform(encoded_df)
-
-                st.dataframe(encoded_scaled)
-
 
             
