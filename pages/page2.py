@@ -83,7 +83,7 @@ if submit_btn:
         st.toast("💔")
         st.stop()  
 
-    # ✅ Valid inputs - proceed to build the test input
+    # Valid inputs - proceed to build the test input
     total_income = applicant_income + coapplicant_income
     loan_income_ratio = loan_amount / total_income
     credit_value = 1.0 if credit_history == "Good" else 0.0
@@ -104,7 +104,7 @@ if submit_btn:
         "Loan_Income_Ratio": loan_income_ratio
     }
 
-    # 🚀 Store only valid data
+    #Store only valid data
     st.session_state.test_input = pd.DataFrame([user_input])
     st.session_state.test_submitted = True
 
