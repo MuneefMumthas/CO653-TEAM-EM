@@ -118,26 +118,23 @@ if submit_btn:
         st.dataframe(st.session_state.test_input)
 
         if st.button("Encode:"):
-            st.session_state.encode_clicked = True
-
-        if st.session_state.encode_clicked:
-            # Perform encoding only once
+            # Encode only when button is clicked
             encoded_df = mestimate_encoder.transform(st.session_state.test_input.copy())
 
             numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
                             'Loan_Amount_Term', 'Credit_History', 'Dependents',
                             'TotalIncome', 'Loan_Income_Ratio']
 
-            # Ensure correct data type for numeric fields
             for col in numeric_cols:
                 encoded_df[col] = st.session_state.test_input[col]
 
-            # Scale
             encoded_scaled = minmax_scaler.transform(encoded_df)
 
-            # Store in session state
+            # Save to session state
             st.session_state.encoded_data = encoded_scaled
 
+        # Always display if already encoded
+        if "encoded_data" in st.session_state:
             st.subheader("Encoded and Scaled Data:")
             st.dataframe(st.session_state.encoded_data)
             
