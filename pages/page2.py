@@ -54,61 +54,57 @@ elif credit_history == "Poor":
 
 
 if submit_btn:
-    missing_fields = []
+    fields = {
+        "Gender": gender,
+        "Married": married,
+        "Dependents": dependents,
+        "Education": education,
+        "Self_Employed": self_employed,
+        "Loan_Amount_Term": loan_term,
+        "Credit_History": credit_history,
+        "Property_Area": property_area
+    }
+
+    missing_fields = [key for key, value in fields.items() if value == "Select"]
     zero_numbers = []
-
-    if gender == "Select":
-        missing_fields.append("Gender")
-    if married == "Select":
-        missing_fields.append("Married")
-    if dependents == "Select":
-        missing_fields.append("Dependents")
-    if education == "Select":
-        missing_fields.append("Education")
-    if self_employed == "Select":
-        missing_fields.append("Self Employed")
-    if credit_history == "Select":
-        missing_fields.append("Credit History")
-    if property_area == "Select":
-        missing_fields.append("Property Area")
-    if loan_term == "Select":
-        missing_fields.append("Loan Term")
-
+    
     if applicant_income == 0:
         zero_numbers.append("Applicant Income")
-    
     if coapplicant_income == 0:
         zero_numbers.append("Co-Applicant Income")
-    
 
     if missing_fields:
         st.error(f"Please select the required field(s): {', '.join(missing_fields)}", icon="🚨")
         st.toast("💔")
-    if zero_numbers:
+    elif zero_numbers:
         st.error(f"Income value needs to be greater than zero: {', '.join(zero_numbers)}", icon="🚨")
         st.toast("💔")
     else:
         total_income = applicant_income + coapplicant_income
-        loan_income_ratio = loan_amount/total_income
+        loan_income_ratio = loan_amount / total_income
+
+        # Handle label adjustment
+        credit_value = 1.0 if credit_history == "Good" else 0.0
 
         user_input = {
             "Gender": gender,
             "Married": married,
+            "Dependents": dependents,
             "Education": education,
             "Self_Employed": self_employed,
             "ApplicantIncome": applicant_income,
             "CoapplicantIncome": coapplicant_income,
             "LoanAmount": loan_amount,
             "Loan_Amount_Term": loan_term,
-            "Credit_History": credit_history,
+            "Credit_History": credit_value,
             "Property_Area": property_area,
             "TotalIncome": total_income,
-            "Loan_Income_Ratio": loan_income_ratio,
+            "Loan_Income_Ratio": loan_income_ratio
         }
 
         st.session_state.test_input = pd.DataFrame([user_input])
         st.session_state.test_submitted = True
-
+        
     if st.session_state.test_submitted:
         st.subheader("Test Input Row:")
         st.dataframe(st.session_state.test_input)
