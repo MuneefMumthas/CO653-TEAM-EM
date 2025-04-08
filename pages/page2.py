@@ -46,6 +46,7 @@ elif credit_history == "Poor":
 
 if submit_btn:
     missing_fields = []
+    zero_numbers = []
 
     if gender == "Select":
         missing_fields.append("Gender")
@@ -64,9 +65,19 @@ if submit_btn:
     if loan_term == "Select":
         missing_fields.append("Loan Term")
 
+    if applicant_income == 0:
+        zero_numbers.append("Applicant Income")
+    
+    if coapplicant_income == 0:
+        zero_numbers.append("Co-Applicant Income")
+    
+
     if missing_fields:
         st.warning(f"⚠️ Please select the required field(s): {', '.join(missing_fields)}")
         st.toast("Please choose something 😭😭")
+    if zero_numbers:
+        st.warning(f"⚠️ Income value needs to be greater than zero: {', '.join(zero_numbers)}")
+        st.toast("Please get a job 😭😭")
     else:
         total_income = applicant_income + coapplicant_income
         loan_income_ratio = loan_amount/total_income
