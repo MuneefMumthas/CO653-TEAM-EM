@@ -113,25 +113,18 @@ if st.session_state.test_submitted:
     st.subheader("Test Input Row:")
     st.dataframe(st.session_state.test_input)
 
-    if st.button("Encode"):
-        cat_columns = list(mestimate_encoder.feature_names_in_)
-        
-        # Transform only the categorical features
-        encoded_df = mestimate_encoder.transform(st.session_state.test_input[cat_columns])
+    if st.button("Encode:"):
+        # Apply encoder
+        encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-        # Add numeric columns back
-        numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
-                        'Loan_Amount_Term', 'Credit_History', 'Dependents',
-                        'TotalIncome', 'Loan_Income_Ratio']
+        # Combine with numeric fields
+        numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
+        encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
 
-        encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols].values
-
-        # Now scale it
+        # Make sure all columns are in right order
         encoded_scaled = minmax_scaler.transform(encoded_df)
 
-        st.subheader("Encoded & Scaled Input")
         st.dataframe(encoded_scaled)
-
             
 
             
