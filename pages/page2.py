@@ -74,10 +74,10 @@ if submit_btn:
 
     if missing_fields:
         st.error(f"Please select the required field(s): {', '.join(missing_fields)}", icon="🚨")
-        st.toast(icon = "💔")
+        st.toast("💔")
     if zero_numbers:
         st.error(f"Income value needs to be greater than zero: {', '.join(zero_numbers)}", icon="🚨")
-        st.toast(icon = "💔")
+        st.toast("💔")
     else:
         total_income = applicant_income + coapplicant_income
         loan_income_ratio = loan_amount/total_income
