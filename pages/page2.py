@@ -37,8 +37,6 @@ with st.form(key="loan_form"):
 
     submit_btn = st.form_submit_button(label="compile into a dataframe")
 
-total_income = applicant_income + coapplicant_income
-loan_income_ratio = loan_amount/total_income
 
 if credit_history == "Good":
     credit_history = 1.0
@@ -67,6 +65,9 @@ if submit_btn:
     if missing_fields:
         st.warning(f"Please select the required field(s): {', '.join(missing_fields)}")
     else:
+        total_income = applicant_income + coapplicant_income
+        loan_income_ratio = loan_amount/total_income
+
         user_input = {
             "Gender": gender,
             "Married": married,
