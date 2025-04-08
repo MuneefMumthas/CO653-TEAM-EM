@@ -23,18 +23,61 @@ st.title("Loan Approval Prediction")
 with st.form(key="loan_form"):
     st.subheader("Enter Applicant Details")
 
-    gender = st.selectbox("Gender", ['Select', 'Male', 'Female'])
-    married = st.selectbox("Married", ['Select', 'Yes', 'No'])
-    dependents = st.selectbox("Dependents", ['Select', '0', '1', '2', '3+'])
+    gender = st.selectbox("What is your Gender", ['Select', 'Male', 'Female'])
+    married = st.selectbox("Are you Married", ['Select', 'Yes', 'No'])
+    dependents = st.selectbox("Do you have any Dependents", ['Select', '0', '1', '2', '3+'])
     education = st.selectbox("Education", ['Select', 'Graduate', 'Not Graduate'])
-    self_employed = st.selectbox("Self Employed", ['Select', 'Yes', 'No'])
+    self_employed = st.selectbox("Are you Self Employed", ['Select', 'Yes', 'No'])
     applicant_income = st.number_input("Applicant Income", min_value=0)
     coapplicant_income = st.number_input("Coapplicant Income", min_value=0)
     loan_amount = st.number_input("Loan Amount (in thousands)", min_value=0)
-    loan_term = st.number_input("Loan Amount Term (in months)", min_value=0)
-    credit_history = st.selectbox("Credit History", ['Select', 1.0, 0.0])
+    loan_term = st.selectbox("Loan Amount Term (in months)", ['Select', 12.0, 36.0,60.0,84.0,120.0,180.0,240.0,360.0,480.0])
+    credit_history = st.selectbox("Credit History", ['Select', "Good", "Poor"])
     property_area = st.selectbox("Property Area", ['Select', 'Urban', 'Semiurban', 'Rural'])
 
     submit_btn = st.form_submit_button(label="compile into a dataframe")
-    
 
+total_income = applicant_income + coapplicant_income
+loan_income_ratio = loan_amount/total_income
+
+if credit_history == "Good":
+    credit_history = 1.0
+elif credit_history == "Poor":
+    credit_history = 0.0
+
+
+if submit_btn:
+    missing_fields = []
+
+    if gender == "Select":
+        missing_fields.append("Gender")
+    if married == "Select":
+        missing_fields.append("Married")
+    if dependents == "Select":
+        missing_fields.append("Dependents")
+    if education == "Select":
+        missing_fields.append("Education")
+    if self_employed == "Select":
+        missing_fields.append("Self Employed")
+    if credit_history == "Select":
+        missing_fields.append("Credit History")
+    if property_area == "Select":
+        missing_fields.append("Property Area")
+
+    if missing_fields:
+        st.warning(f"Please select the required field(s): {', '.join(missing_fields)}")
+    else:
+        user_input = {
+            "Gender": gender,
+            "Married": married,
+            "Education": education,
+            "Self_Employed": self_employed,
+            "ApplicantIncome": applicant_income,
+            "CoapplicantIncome": coapplicant_income,
+            "LoanAmount": loan_amount,
+            "Loan_Amount_Term": loan_term,
+            "Credit_History": credit_history,
+            "Property_Area": property_area,
+            "TotalIncome": total_income,
+            "Loan_Income_Ratio": loan_income_ratio,
+        }
