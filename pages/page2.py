@@ -117,26 +117,36 @@ if st.session_state.test_submitted:
     st.subheader("Test Input Row:")
     st.dataframe(st.session_state.test_input)
 
-    if st.button("Encode:"):
-        # Encode only when button is clicked
-        encoded_df = mestimate_encoder.transform(st.session_state.test_input.copy())
+    if st.button("Encode"):
+        try:
+            input_df = st.session_state.test_input.copy()
 
-        numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
-                        'Loan_Amount_Term', 'Credit_History', 'Dependents',
-                        'TotalIncome', 'Loan_Income_Ratio']
+            # Columns you trained encoders on
+            categorical_cols = ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'Property_Area']
+            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
+                            'Loan_Amount_Term', 'Credit_History', 'TotalIncome', 'Loan_Income_Ratio']
 
-        for col in numeric_cols:
-            encoded_df[col] = st.session_state.test_input[col]
+            # Step 1: Encode only categorical columns
+            encoded_cats = mestimate_encoder.transform(input_df[categorical_cols])
+            st.subheader("✅ Encoded Categorical Columns:")
+            st.dataframe(encoded_cats)
 
-        encoded_scaled = minmax_scaler.transform(encoded_df)
+            # Step 2: Combine encoded categorical data with numeric columns
+            final_input = pd.concat([encoded_cats.reset_index(drop=True), input_df[numeric_cols].reset_index(drop=True)], axis=1)
 
-        # Save to session state
-        st.session_state.encoded_data = encoded_scaled
+            st.subheader("📊 Combined Data Before Scaling:")
+            st.dataframe(final_input)
 
-    # Always display if already encoded
-    if "encoded_data" in st.session_state:
-        st.subheader("Encoded and Scaled Data:")
-        st.dataframe(st.session_state.encoded_data)
-            
+            # Step 3: Scale the full input
+            encoded_scaled = minmax_scaler.transform(final_input)
+            scaled_df = pd.DataFrame(encoded_scaled, columns=final_input.columns)
+
+            # Store and show
+            st.session_state.encoded_data = encoded_scaled
+            st.subheader("🎯 Encoded and Scaled Final Input")
+            st.dataframe(scaled_df)
+
+        except Exception as e:
+            st.error(f"❌ Error during encoding or scaling: {e}")
 
             
