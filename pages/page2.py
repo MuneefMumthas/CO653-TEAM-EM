@@ -61,6 +61,8 @@ if submit_btn:
         missing_fields.append("Credit History")
     if property_area == "Select":
         missing_fields.append("Property Area")
+    if loan_term == "Select"
+        missing_fields.append("Loan Term")
 
     if missing_fields:
         st.toast(f"Please select the required field(s): {', '.join(missing_fields)}")
