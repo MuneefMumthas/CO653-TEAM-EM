@@ -65,7 +65,7 @@ if submit_btn:
         missing_fields.append("Loan Term")
 
     if missing_fields:
-        st.toast(f"⚠️ Please select the required field(s): {', '.join(missing_fields)}")
+        st.warning(f"⚠️ Please select the required field(s): {', '.join(missing_fields)}")
     else:
         total_income = applicant_income + coapplicant_income
         loan_income_ratio = loan_amount/total_income
