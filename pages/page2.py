@@ -104,47 +104,45 @@ if st.session_state.test_submitted:
 # --- Encode + Scale on Button Click ---
 if st.session_state.test_submitted and st.button("Encode & Scale"):
     try:
-        df = st.session_state.test_input.copy()
+        input_df = st.session_state.test_input.copy()
 
-        # Separate columns
+        # 1. Columns
         categorical_cols = ['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed', 'Property_Area']
         numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
                         'Loan_Amount_Term', 'Credit_History', 'TotalIncome', 'Loan_Income_Ratio']
 
-        # Encode categoricals
-        encoded_cats = mestimate_encoder.transform(df[categorical_cols])
-        numeric_df = df[numeric_cols]
+        # 2. Encode categorical columns
+        encoded_cats = mestimate_encoder.transform(input_df[categorical_cols])
+        st.write("✅ Encoded categorical shape:", encoded_cats.shape)
 
-        # Combine
-        combined_df = pd.concat([encoded_cats.reset_index(drop=True), numeric_df.reset_index(drop=True)], axis=1)
+        # 3. Convert to DataFrame with correct column names if possible
+        if hasattr(mestimate_encoder, 'get_feature_names_out'):
+            encoded_cat_cols = mestimate_encoder.get_feature_names_out(categorical_cols)
+        else:
+            encoded_cat_cols = categorical_cols  # fallback (generic column names)
 
-        # Reorder columns if scaler has saved order
+        encoded_cat_df = pd.DataFrame(encoded_cats, columns=encoded_cat_cols)
+
+        # 4. Combine with numeric
+        numeric_df = input_df[numeric_cols].reset_index(drop=True)
+        combined_df = pd.concat([encoded_cat_df.reset_index(drop=True), numeric_df], axis=1)
+
+        st.write("✅ Combined DataFrame shape (before scaling):", combined_df.shape)
+        st.dataframe(combined_df)
+
+        # 5. Reorder if scaler remembers training order
         if hasattr(minmax_scaler, 'feature_names_in_'):
-            expected_cols = list(minmax_scaler.feature_names_in_)
-            combined_df = combined_df[expected_cols]
+            expected_order = list(minmax_scaler.feature_names_in_)
+            combined_df = combined_df[expected_order]
 
-        # Scale
+        # 6. Scale
         encoded_scaled = minmax_scaler.transform(combined_df)
         scaled_df = pd.DataFrame(encoded_scaled, columns=combined_df.columns)
 
-        # Save to state
         st.session_state.encoded_data = encoded_scaled
-
-        st.subheader("✅ Encoded and Scaled Data:")
+        st.subheader("🎯 Encoded and Scaled Final Input")
         st.dataframe(scaled_df)
 
     except Exception as e:
         st.error(f"❌ Error during encoding or scaling: {e}")
-
-# --- Predict Button ---
-if st.session_state.encoded_data is not None and st.button("Predict Loan Approval"):
-    try:
-        prediction = model.predict(st.session_state.encoded_data)
-        prediction_class = (prediction > 0.5).astype(int)
-        decoded_result = label_encoder.inverse_transform(prediction_class.ravel())
-
-        st.success(f"🔮 Prediction: {decoded_result[0]} (Confidence: {prediction[0][0]:.2f})")
-
-    except Exception as e:
-        st.error(f"❌ Error during prediction: {e}")
             
