@@ -10,7 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 
 #Loading the saved objects
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
-mestimate_encoder_ = joblib.load("pages/pkl/mestimate_encoder.pkl")
+mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
 minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
 label_encoder = joblib.load("pages/pkl/label_encoder.pkl")
 
@@ -19,6 +19,15 @@ st.title("Neural Network 🧠")
 st.markdown("---")
 
 st.title("Loan Approval Prediction")
+
+#session state to trac state of buttons
+if "test_submitted" not in st.session_state:
+    st.session_state.test_submitted = False
+
+if "prediction_ready" not in st.session_state:
+    st.session_state.prediction_ready = False
+
+
 
 with st.form(key="loan_form"):
     st.subheader("Enter Applicant Details")
@@ -96,3 +105,27 @@ if submit_btn:
             "TotalIncome": total_income,
             "Loan_Income_Ratio": loan_income_ratio,
         }
+
+        st.session_state.test_input = pd.DataFrame([user_input])
+        st.session_state.test_submitted = True
+
+    if st.session_state.test_submitted:
+        st.subheader("Test Input Row:")
+        st.dataframe(st.session_state.test_input)
+
+        if st.button("Predict"):
+            # Apply encoder
+            encoded_df = mestimate_encoder.transform(st.session_state.test_input)
+
+            # Combine with numeric fields
+            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
+            encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
+
+            # Make sure all columns are in right order
+            encoded_scaled = minmax_scaler.transform(encoded_df)
+
+            prediction = model.predict(encoded_scaled)
+            result = label_encoder.inverse_transform([np.argmax(prediction)])
+
+            st.success(f"Prediction: {result[0]}")
+            st.session_state.prediction_ready = True
