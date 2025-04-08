@@ -113,19 +113,4 @@ if submit_btn:
         st.subheader("Test Input Row:")
         st.dataframe(st.session_state.test_input)
 
-        if st.button("Predict"):
-            # Apply encoder
-            encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-
-            # Combine with numeric fields
-            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
-            encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
-
-            # Make sure all columns are in right order
-            encoded_scaled = minmax_scaler.transform(encoded_df)
-
-            prediction = model.predict(encoded_scaled)
-            result = label_encoder.inverse_transform([np.argmax(prediction)])
-
-            st.success(f"Prediction: {result[0]}")
-            st.session_state.prediction_ready = True
+        
