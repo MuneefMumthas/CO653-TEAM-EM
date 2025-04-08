@@ -27,6 +27,11 @@ if "test_submitted" not in st.session_state:
 if "prediction_ready" not in st.session_state:
     st.session_state.prediction_ready = False
 
+if "encoded_data" not in st.session_state:
+    st.session_state.encoded_data = None
+
+if "encode_clicked" not in st.session_state:
+    st.session_state.encode_clicked = False
 
 
 with st.form(key="loan_form"):
@@ -112,24 +117,27 @@ if submit_btn:
         st.subheader("Test Input Row:")
         st.dataframe(st.session_state.test_input)
 
-        if "encoded_data" not in st.session_state:
-            st.session_state.encoded_data = None
-
         if st.button("Encode:"):
-            encoded_df = mestimate_encoder.transform(st.session_state.test_input)
+            st.session_state.encode_clicked = True
+
+        if st.session_state.encode_clicked:
+            # Perform encoding only once
+            encoded_df = mestimate_encoder.transform(st.session_state.test_input.copy())
 
             numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
                             'Loan_Amount_Term', 'Credit_History', 'Dependents',
                             'TotalIncome', 'Loan_Income_Ratio']
 
-            encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
+            # Ensure correct data type for numeric fields
+            for col in numeric_cols:
+                encoded_df[col] = st.session_state.test_input[col]
 
+            # Scale
             encoded_scaled = minmax_scaler.transform(encoded_df)
 
+            # Store in session state
             st.session_state.encoded_data = encoded_scaled
 
-        # Show encoded dataframe if it exists
-        if st.session_state.encoded_data is not None:
             st.subheader("Encoded and Scaled Data:")
             st.dataframe(st.session_state.encoded_data)
             
