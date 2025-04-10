@@ -92,7 +92,8 @@ if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-        # Select only the columns for scaling
+
+        # === 2. Define columns to scale ===
         columns_for_scaling = [
             'ApplicantIncome',
             'CoapplicantIncome',
@@ -100,8 +101,15 @@ if st.session_state.test_submitted:
             'TotalIncome',
             'Loan_Amount_Term'
         ]
-        scaled = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
-        st.dataframe(encoded_df)
-        st.dataframe(pd.DataFrame(scaled, columns=columns_for_scaling))
+        # === 3. Scale only selected columns ===
+        scaled_values = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
+        # === 4. Replace original columns with scaled values ===
+        encoded_df_scaled = encoded_df.copy()
+        encoded_df_scaled[columns_for_scaling] = scaled_values
+
+        # === 5. Save to session state or display ===
+        st.session_state.encoded_data = encoded_df_scaled
+
+        st.dataframe(encoded_df_scaled)
