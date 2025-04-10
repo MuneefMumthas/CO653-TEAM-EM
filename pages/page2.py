@@ -93,4 +93,3 @@ if st.session_state.test_submitted:
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
         st.dataframe(encoded_df)
-            
