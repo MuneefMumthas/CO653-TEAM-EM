@@ -14,7 +14,7 @@ encoder_onehot = joblib.load("pages/pkl/onehot_encoder.pkl")
 # === Title ===
 st.title("Neural Network 🧠")
 st.markdown("---")
-st.title("Loan Approval Prediction")
+st.title("Loan Approval Prediction test")
 
 # === Session States ===
 if "test_submitted" not in st.session_state:
