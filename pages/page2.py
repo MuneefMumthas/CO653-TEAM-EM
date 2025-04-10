@@ -90,7 +90,6 @@ if submit_btn:
 # === Encoding and Scaling ===
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
-    #st.dataframe(st.session_state.test_input)
     st.write("✅ Columns in session_state.test_input:", st.session_state.test_input.columns.tolist())
     st.write("✅ Shape:", st.session_state.test_input.shape)
 
