@@ -92,4 +92,4 @@ if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-        #st.dataframe(encoded_df)
+        st.dataframe(encoded_df)
