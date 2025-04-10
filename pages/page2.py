@@ -92,8 +92,16 @@ if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-        st.write("🔧 Scaler expects:", minmax_scaler.feature_names_in_)
-        st.write("🧾 Your DataFrame columns:", encoded_df.columns.tolist())
+        # Select only the columns for scaling
+        columns_for_scaling = [
+            'ApplicantIncome',
+            'CoapplicantIncome',
+            'LoanAmount',
+            'TotalIncome',
+            'Loan_Amount_Term'
+        ]
+        scaled = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
         st.dataframe(encoded_df)
+        st.dataframe(pd.DataFrame(scaled, columns=columns_for_scaling))
 
