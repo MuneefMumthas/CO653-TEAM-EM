@@ -14,7 +14,7 @@ encoder_onehot = joblib.load("pages/pkl/onehot_encoder.pkl")
 # === Title ===
 st.title("Neural Network 🧠")
 st.markdown("---")
-st.title("Loan Approval Prediction test")
+st.title("Loan Approval Prediction")
 
 # === Session States ===
 if "test_submitted" not in st.session_state:
@@ -92,4 +92,4 @@ if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-        st.dataframe(encoded_df)
+        #st.dataframe(encoded_df)
