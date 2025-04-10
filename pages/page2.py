@@ -90,6 +90,7 @@ if submit_btn:
 # === Encoding and Scaling ===
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
+    st.dataframe(st.session_state.test_input)
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
         st.dataframe(encoded_df)
