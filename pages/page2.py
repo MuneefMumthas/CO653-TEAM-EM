@@ -95,34 +95,16 @@ if st.session_state.test_submitted:
         try:
             df = st.session_state.test_input.copy()
 
-            # === 1. Apply MEstimate Encoder ===
-            mest_encoded = mestimate_encoder.transform(df[['Gender', 'Married', 'Property_Area', 'Education', 'Self_Employed']])
-            st.write(f"MEstimate Encoded shape: {mest_encoded.shape}")
-            
-            # === 2. Apply OneHot Encoder ===
-            dependents = df[["Dependents"]]
-            dependents_encoded = encoder_onehot.transform(dependents)
+            encoded_df = mestimate_encoder.transform(df)
+ 
+             # Combine with numeric fields
+            numeric_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History', 'Dependents', 'TotalIncome', 'Loan_Income_Ratio']
+            encoded_df[numeric_cols] = st.session_state.test_input[numeric_cols]
 
-            if hasattr(dependents_encoded, "toarray"):
-                dependents_encoded = dependents_encoded.toarray()
+            # Make sure all columns are in right order
+            encoded_scaled = minmax_scaler.transform(encoded_df)
 
-            # === 3. Apply MinMaxScaler ===
-            numeric_cols = ["ApplicantIncome", "CoapplicantIncome", "LoanAmount", "TotalIncome", "Loan_Amount_Term"]
-            numeric_scaled = minmax_scaler.transform(df[numeric_cols])
-
-            # === 4. Credit History ===
-            credit = df[["Credit_History"]].values  # Already 0.0 or 1.0
-
-            # === 5. Combine all ===
-            import numpy as np
-            final_input = np.concatenate([mest_encoded, dependents_encoded, numeric_scaled, credit], axis=1)
-
-            # Save for prediction
-            st.session_state.encoded_data = final_input
-            st.success("✅ Input encoded and scaled successfully.")
-
-            st.write(f"Shape: {final_input.shape}")
-            st.write(final_input)
+            st.dataframe(encoded_scaled)
 
         except Exception as e:
             st.error(f"❌ Error during encoding/scaling: {e}")
