@@ -95,46 +95,26 @@ if st.session_state.test_submitted:
         try:
             df = st.session_state.test_input.copy()
 
-            # Step 1: MEstimate Encoding
-            mestimate_cols = ['Gender', 'Married', 'Property_Area', 'Education', 'Self_Employed']
-            encoded_mest = mestimate_encoder.transform(df[mestimate_cols])
-            encoded_mest = pd.DataFrame(encoded_mest, columns=mestimate_cols)
+            # === Apply encoders ===
 
-            # Step 2: OneHot Encoding for Dependents
-            dependents_encoded = encoder_onehot.transform(df[['Dependents']])
-            dependents_df = pd.DataFrame(dependents_encoded, columns=encoder_onehot.get_feature_names_out(['Dependents']))
+            # One-hot encoding for categorical features
+            categorical_features = df[["Gender", "Married", "Dependents", "Education", "Self_Employed", "Property_Area"]]
+            encoded_cats = encoder_onehot.transform(categorical_features)
 
-            # Step 3: MinMax Scaling
-            scale_cols = ['ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'TotalIncome', 'Loan_Amount_Term']
-            scaled_values = minmax_scaler.transform(df[scale_cols])
-            scaled_df = pd.DataFrame(scaled_values, columns=scale_cols)
+            # MinMax scaling for numerical features
+            numerical_features = df[["ApplicantIncome", "CoapplicantIncome", "LoanAmount", "Loan_Amount_Term", "TotalIncome", "Loan_Income_Ratio"]]
+            scaled_nums = minmax_scaler.transform(numerical_features)
 
-            # Step 4: Credit History (not scaled)
-            credit_df = df[['Credit_History']].reset_index(drop=True)
+            # Label encode credit history (already numeric)
+            credit_history = df[["Credit_History"]].values  # Already 0.0 or 1.0
 
-            # Final DataFrame
-            final_input = pd.concat([
-                encoded_mest.reset_index(drop=True),
-                dependents_df.reset_index(drop=True),
-                scaled_df.reset_index(drop=True),
-                credit_df
-            ], axis=1)
+            # Concatenate all transformed features
+            import numpy as np
+            final_input = np.concatenate([encoded_cats.toarray(), scaled_nums, credit_history], axis=1)
 
             st.session_state.encoded_data = final_input
-            st.subheader("✅ Final Encoded + Scaled Input")
-            st.dataframe(final_input)
+            st.success("✅ Input encoded and scaled successfully.")
+            st.dataframe(st.session_state.encoded_data)
 
         except Exception as e:
-            st.error(f"❌ Error during encoding/scaling: {e}")
-
-# === Predict ===
-if st.session_state.encoded_data is not None and st.button("Predict Loan Approval"):
-    try:
-        prediction = model.predict(st.session_state.encoded_data)
-        result = (prediction > 0.5).astype(int)
-        decoded = label_encoder.inverse_transform(result.ravel())
-
-        st.success(f"🔮 Prediction: {decoded[0]} (Confidence: {prediction[0][0]:.2f})")
-
-    except Exception as e:
-        st.error(f"❌ Prediction error: {e}")
+            st.error(f"⚠️ Encoding failed: {e}")
