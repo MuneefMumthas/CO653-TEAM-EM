@@ -83,8 +83,8 @@ if submit_btn:
         "Loan_Income_Ratio": loan_income_ratio
     }])
 
-    st.session_state.test_input = user_input
-    st.session_state.test_submitted = True
+    #st.session_state.test_input = user_input
+    #st.session_state.test_submitted = True
 
 
 # === Encoding and Scaling ===
@@ -92,4 +92,4 @@ if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
-        #st.dataframe(encoded_df)
+        st.dataframe(encoded_df)
