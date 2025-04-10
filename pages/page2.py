@@ -95,23 +95,10 @@ if st.session_state.test_submitted:
         try:
             df = st.session_state.test_input.copy()
             
-            # Columns to be encoded with m-estimate
-            columns_to_encode = ['Gender', 'Married', 'Property_Area', 'Education', 'Self_Employed']
-
             # Apply the encoder on user
-            encoded_df = mestimate_encoder.transform(df[columns_to_encode])
+            encoded_df = mestimate_encoder.transform(df)
 
-            # If the encoder returns a DataFrame or array, we combine it back with the rest of the user_input
-            # Convert to DataFrame and use same column names if they were preserved
-            encoded_df = pd.DataFrame(encoded_df, columns=mestimate_encoder.get_feature_names_out(columns_to_encode))
-
-            # Drop original encoded columns from user_input
-            user_input_dropped = user_input.drop(columns=columns_to_encode)
-
-            # Combine the transformed and non-transformed columns
-            final_input = pd.concat([encoded_df, user_input_dropped], axis=1)
-
-            st.dataframe(final_input)
+            st.dataframe(encoded_df)
             
         except Exception as e:
             st.error(f"❌ Error during encoding/scaling: {e}")
