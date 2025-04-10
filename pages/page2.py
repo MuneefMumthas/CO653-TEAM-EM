@@ -95,26 +95,34 @@ if st.session_state.test_submitted:
         try:
             df = st.session_state.test_input.copy()
 
-            # === Apply encoders ===
+            # === 1. Apply MEstimate Encoder ===
+            cat_mest = df[["Gender", "Married", "Property_Area", "Education", "Self_Employed"]]
+            mest_encoded = mestimate_encoder.transform(cat_mest)
 
-            # One-hot encoding for categorical features
-            categorical_features = df[["Gender", "Married", "Dependents", "Education", "Self_Employed", "Property_Area"]]
-            encoded_cats = encoder_onehot.transform(categorical_features)
+            # === 2. Apply OneHot Encoder ===
+            dependents = df[["Dependents"]]
+            dependents_encoded = encoder_onehot.transform(dependents)
 
-            # MinMax scaling for numerical features
-            numerical_features = df[["ApplicantIncome", "CoapplicantIncome", "LoanAmount", "Loan_Amount_Term", "TotalIncome", "Loan_Income_Ratio"]]
-            scaled_nums = minmax_scaler.transform(numerical_features)
+            if hasattr(dependents_encoded, "toarray"):
+                dependents_encoded = dependents_encoded.toarray()
 
-            # Label encode credit history (already numeric)
-            credit_history = df[["Credit_History"]].values  # Already 0.0 or 1.0
+            # === 3. Apply MinMaxScaler ===
+            numeric_cols = ["ApplicantIncome", "CoapplicantIncome", "LoanAmount", "TotalIncome", "Loan_Amount_Term"]
+            numeric_scaled = minmax_scaler.transform(df[numeric_cols])
 
-            # Concatenate all transformed features
+            # === 4. Credit History ===
+            credit = df[["Credit_History"]].values  # Already 0.0 or 1.0
+
+            # === 5. Combine all ===
             import numpy as np
-            final_input = np.concatenate([encoded_cats.toarray(), scaled_nums, credit_history], axis=1)
+            final_input = np.concatenate([mest_encoded, dependents_encoded, numeric_scaled, credit], axis=1)
 
+            # Save for prediction
             st.session_state.encoded_data = final_input
             st.success("✅ Input encoded and scaled successfully.")
-            st.dataframe(st.session_state.encoded_data)
+
+            st.write(f"Shape: {final_input.shape}")
+            st.write(final_input)
 
         except Exception as e:
-            st.error(f"⚠️ Encoding failed: {e}")
+            st.error(f"❌ Error during encoding/scaling: {e}")
