@@ -96,9 +96,9 @@ if st.session_state.test_submitted:
             df = st.session_state.test_input.copy()
 
             # === 1. Apply MEstimate Encoder ===
-            cat_mest = df[["Gender", "Married", "Property_Area", "Education", "Self_Employed"]]
-            mest_encoded = mestimate_encoder.transform(cat_mest)
-
+            mest_encoded = mestimate_encoder.transform(df[['Gender', 'Married', 'Property_Area', 'Education', 'Self_Employed']])
+            st.write(f"MEstimate Encoded shape: {mest_encoded.shape}")
+            
             # === 2. Apply OneHot Encoder ===
             dependents = df[["Dependents"]]
             dependents_encoded = encoder_onehot.transform(dependents)
