@@ -112,4 +112,21 @@ if st.session_state.test_submitted:
         # === 5. Save to session state or display ===
         st.session_state.encoded_data = encoded_df_scaled
 
-        st.dataframe(encoded_df_scaled)
+        # === 6. One-hot encode "Dependents" ===
+        dependents_array = encoder_onehot.transform(encoded_df_scaled[["Dependents"]])
+
+        # Convert to DataFrame with column names like 'Dependents_0', 'Dependents_1', etc.
+        dependents_encoded_df = pd.DataFrame(
+            dependents_array,
+            columns=encoder_onehot.get_feature_names_out(["Dependents"]),
+            index=encoded_df_scaled.index  # To preserve row alignment
+        )
+
+        # Drop the original "Dependents" column and concatenate one-hot version
+        final_df = encoded_df_scaled.drop(columns=["Dependents"])
+        final_df = pd.concat([final_df, dependents_encoded_df], axis=1)
+
+        # Save to session and display
+        st.session_state.encoded_data = final_df
+        st.dataframe(final_df)
+        
