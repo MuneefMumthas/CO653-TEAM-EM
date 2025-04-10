@@ -95,6 +95,20 @@ if st.session_state.test_submitted:
     st.write("✅ Shape:", st.session_state.test_input.shape)
 
     if st.button("Preprocess"):
+        
+        # Check what features the encoder expects
+        try:
+            st.write("🔍 Expected by encoder:", mestimate_encoder.feature_names_in_)
+        except AttributeError:
+            st.warning("⚠️ The encoder does not have `feature_names_in_` attribute.")
+            st.write("Try printing encoder input columns from training notebook.")
+
+        # Check what you are giving
+        st.write("📥 You provided columns:", st.session_state.test_input.columns.tolist())
+        st.write("📐 You provided shape:", st.session_state.test_input.shape)
+
+
+        '''
         try:
             # Apply the encoder on user
             encoded_df = mestimate_encoder.transform(st.session_state.test_input)
@@ -102,3 +116,4 @@ if st.session_state.test_submitted:
             
         except Exception as e:
             st.error(f"❌ Error during encoding/scaling: {e}")
+        '''
