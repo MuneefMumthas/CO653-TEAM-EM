@@ -14,7 +14,7 @@ encoder_onehot = joblib.load("pages/pkl/onehot_encoder.pkl")
 # === Title ===
 st.title("Neural Network 🧠")
 st.markdown("---")
-st.title("Loan Approval Prediction muneef")
+st.title("Loan Approval Prediction")
 
 # === Session States ===
 if "test_submitted" not in st.session_state:
@@ -83,8 +83,8 @@ if submit_btn:
         "Loan_Income_Ratio": loan_income_ratio
     }])
 
-    #st.session_state.test_input = user_input
-    #st.session_state.test_submitted = True
+    st.session_state.test_input = user_input
+    st.session_state.test_submitted = True
 
 
 # === Encoding and Scaling ===
