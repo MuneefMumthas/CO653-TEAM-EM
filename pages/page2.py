@@ -91,11 +91,11 @@ if submit_btn:
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     st.dataframe(st.session_state.test_input)
+    st.write("✅ Columns in session_state.test_input:", st.session_state.test_input.columns.tolist())
+    st.write("✅ Shape:", st.session_state.test_input.shape)
 
     if st.button("Preprocess"):
         try:
-            st.write("✅ Columns in session_state.test_input:", st.session_state.test_input.columns.tolist())
-            st.write("✅ Shape:", st.session_state.test_input.shape)
             # Apply the encoder on user
             encoded_df = mestimate_encoder.transform(st.session_state.test_input)
             st.dataframe(encoded_df)
