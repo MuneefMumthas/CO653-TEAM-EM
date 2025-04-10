@@ -55,7 +55,7 @@ if submit_btn:
         "Property_Area": property_area
     }
     missing = [k for k, v in fields.items() if v == "Select"]
-    if applicant_income == 0 or coapplicant_income == 0:
+    if applicant_income == 0 and coapplicant_income == 0:
         st.error("Applicant/Coapplicant income cannot be zero.", icon="🚨")
         st.stop()
     if missing:
@@ -90,17 +90,11 @@ if submit_btn:
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     st.dataframe(st.session_state.test_input)
-    st.write(st.session_state.test_input.shape)
 
     if st.button("Preprocess"):
         try:
-            df = st.session_state.test_input.copy()
-
-            st.write(df.shape)
-
             # Apply the encoder on user
-            encoded_df = mestimate_encoder.transform(df)
-
+            encoded_df = mestimate_encoder.transform(st.session_state.test_input)
             st.dataframe(encoded_df)
             
         except Exception as e:
