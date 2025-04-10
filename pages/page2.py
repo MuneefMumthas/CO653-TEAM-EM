@@ -90,6 +90,7 @@ if submit_btn:
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     st.dataframe(st.session_state.test_input)
+    st.write(st.session_state.test_input.shape)
 
     if st.button("Preprocess"):
         try:
