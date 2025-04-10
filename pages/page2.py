@@ -94,7 +94,9 @@ if st.session_state.test_submitted:
     if st.button("Preprocess"):
         try:
             df = st.session_state.test_input.copy()
-            
+
+            st.write(df.shape)
+
             # Apply the encoder on user
             encoded_df = mestimate_encoder.transform(df)
 
