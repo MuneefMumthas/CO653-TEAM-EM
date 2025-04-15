@@ -148,11 +148,18 @@ if st.session_state.test_encoded:
         # probability for prediction
         prediction_label = (prediction_probability > 0.5).astype(int)
 
-        # Decode prediction if label_encoder was used during training
-        if label_encoder:
-            predicted_class = label_encoder.inverse_transform(prediction_label.reshape(-1))[0]
-        else:
-            predicted_class = "Approved" if prediction_label[0][0] == 1 else "Rejected"
+        # Decode prediction as label_encoder was used during training
+        predicted_class = label_encoder.inverse_transform(prediction_label.reshape(-1))[0]
 
-        st.success(f"🔮 Prediction: **{predicted_class}**")
+        #class mapping
+        if predicted_class == "Y" and prediction_probability[0][0] > 0.75:
+            predicted_lable = "More likely to be approved"
+        elif predicted_class == "Y" and prediction_probability[0][0] > 0.5:
+            predicted_lable = "Likely to be approved"
+        elif predicted_class == "N" and prediction_probability[0][0] < 0.5:
+            predicted_lable = "Likely to be rejected"
+        elif predicted_class == "N" and prediction_probability[0][0] < 0.25:
+            predicted_lable = "More likely to be rejected"
+
+        st.success(f"🔮 Prediction: **{predicted_lable}**")
         st.info(f"📊 Confidence Score: **{prediction_probability[0][0]:.2f}**")
