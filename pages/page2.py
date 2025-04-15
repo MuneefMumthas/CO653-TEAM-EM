@@ -143,3 +143,8 @@ if st.session_state.test_encoded:
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
         
+        prediction = model.predict(X_test)
+        
+
+        st.success(f"🔮 Prediction: **{prediction}**")
+       
