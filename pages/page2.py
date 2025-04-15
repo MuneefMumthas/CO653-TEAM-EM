@@ -19,6 +19,7 @@ st.title("Loan Approval Prediction")
 # Session States
 if "test_submitted" not in st.session_state:
     st.session_state.test_submitted = False
+    st.session_state.test_encoded = False
 if "encoded_data" not in st.session_state:
     st.session_state.encoded_data = None
 
