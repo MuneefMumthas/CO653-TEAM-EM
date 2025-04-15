@@ -4,25 +4,25 @@ import numpy as np
 import joblib
 import tensorflow as tf
 
-# === Load Trained Models and Encoders ===
+# Load Trained Models and Encoders ===
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
 mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
 minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
 label_encoder = joblib.load("pages/pkl/label_encoder.pkl")
 encoder_onehot = joblib.load("pages/pkl/onehot_encoder.pkl")
 
-# === Title ===
+# Title
 st.title("Neural Network 🧠")
 st.markdown("---")
 st.title("Loan Approval Prediction")
 
-# === Session States ===
+# Session States
 if "test_submitted" not in st.session_state:
     st.session_state.test_submitted = False
 if "encoded_data" not in st.session_state:
     st.session_state.encoded_data = None
 
-# === Input Form ===
+# Input Form
 with st.form(key="loan_form"):
     st.subheader("Enter Applicant Details")
 
@@ -40,7 +40,7 @@ with st.form(key="loan_form"):
 
     submit_btn = st.form_submit_button("Submit")
 
-# === Input Validation ===
+# Input Validation
 if credit_history == "Good":
     credit_history = 1.0
 elif credit_history == "Poor":
@@ -87,13 +87,13 @@ if submit_btn:
     st.session_state.test_submitted = True
 
 
-# === Encoding and Scaling ===
+# Encoding and Scaling
 if st.session_state.test_submitted:
     st.subheader("📋 Test Input Row")
     if st.button("Preprocess"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-        # === 2. Define columns to scale ===
+        # Define columns to scale
         columns_for_scaling = [
             'ApplicantIncome',
             'CoapplicantIncome',
@@ -102,17 +102,17 @@ if st.session_state.test_submitted:
             'Loan_Amount_Term'
         ]
 
-        # === 3. Scale only selected columns ===
+        # Scale only selected columns
         scaled_values = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
-        # === 4. Replace original columns with scaled values ===
+        # Replace original columns with scaled values
         encoded_df_scaled = encoded_df.copy()
         encoded_df_scaled[columns_for_scaling] = scaled_values
 
-        # === 5. Save to session state or display ===
+        # Save to session state or display
         st.session_state.encoded_data = encoded_df_scaled
 
-        # === 6. One-hot encode "Dependents" ===
+        # One-hot encode Dependents column
         dependents_array = encoder_onehot.transform(encoded_df_scaled[["Dependents"]])
 
         # Convert to DataFrame with column names like 'Dependents_0', 'Dependents_1', etc.
