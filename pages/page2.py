@@ -154,5 +154,5 @@ if st.session_state.test_encoded:
         else:
             predicted_class = "Approved" if prediction_label[0][0] == 1 else "Rejected"
 
-        st.success(f"🔮 Prediction: **{prediction_label}**")
+        st.success(f"🔮 Prediction: **{predicted_class}**")
         st.info(f"📊 Confidence Score: **{prediction_probability[0][0]:.2f}**")
