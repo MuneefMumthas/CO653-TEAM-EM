@@ -83,15 +83,16 @@ if submit_btn:
         "Loan_Income_Ratio": loan_income_ratio
     }])
 
-    st.dataframe(user_input)
     st.session_state.test_input = user_input
     st.session_state.test_submitted = True
 
 
 # Encoding and Scaling
 if st.session_state.test_submitted:
-    st.subheader("📋 Test Input Row")
-    if st.button("Preprocess"):
+    st.dataframe(user_input)
+    st.subheader("📋 Preprocess the input data")
+
+    if st.button("Encode & Scale"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
         # Define columns to scale
@@ -129,5 +130,15 @@ if st.session_state.test_submitted:
 
         # Save to session and display
         st.session_state.encoded_data = final_df
-        st.dataframe(final_df)
+        
+        st.session_state.test_encoded = True
+
+# Prediction
+if st.session_state.test_encoded:
+    st.dataframe(final_df)
+
+    st.subheader("Predict Loan Status")
+    if st.button("Predict"):
+        # Prepare input for prediction
+        X_test = st.session_state.encoded_data.copy()
         
