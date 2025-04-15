@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 import tensorflow as tf
 
-# Load Trained Models and Encoders ===
+# Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
 mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
 minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
@@ -12,9 +12,9 @@ label_encoder = joblib.load("pages/pkl/label_encoder.pkl")
 encoder_onehot = joblib.load("pages/pkl/onehot_encoder.pkl")
 
 # Title
-st.title("Neural Network 🧠")
+st.title("Neural Network 🧠", anchor=False)
 st.markdown("---")
-st.title("Loan Approval Prediction")
+st.title("Loan Approval Prediction", anchor=False)
 
 # Session States
 if "test_submitted" not in st.session_state:
@@ -25,7 +25,7 @@ if "encoded_data" not in st.session_state:
 
 # Input Form
 with st.form(key="loan_form"):
-    st.subheader("Enter Applicant Details")
+    st.subheader("Enter Applicant Details", anchor=False)
 
     gender = st.selectbox("Gender", ['Select', 'Male', 'Female'])
     married = st.selectbox("Married", ['Select', 'Yes', 'No'])
@@ -91,7 +91,7 @@ if submit_btn:
 # Encoding and Scaling
 if st.session_state.test_submitted:
     st.dataframe(st.session_state.test_input)
-    st.subheader("📋 Preprocess the input data")
+    st.subheader("📋 Preprocess the input data", anchor=False)
 
     if st.button("Encode & Scale"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
@@ -138,7 +138,7 @@ if st.session_state.test_submitted:
 if st.session_state.test_encoded:
     st.dataframe(st.session_state.encoded_data)
 
-    st.subheader("Predict Loan Status")
+    st.subheader("Predict Loan Status", anchor=False)
     if st.button("Predict"):
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
@@ -164,9 +164,10 @@ if st.session_state.test_encoded:
         st.success(f"🔮 Prediction: **{predicted_lable}**")
         st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
         st.balloons()
-        st.write("Note: The prediction score is a probability value between 0 and 1. A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
+        st.write("Note: The prediction score is a probability value between 0 and 1. " \
+        "A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
         st.markdown("---")
-        st.subheader("class mapping")
+        st.subheader("Class mapping", anchor=False)
         st.write("1. More likely to be approved: Probability > 0.75")
         st.write("2. Likely to be approved: Probability > 0.5")
         st.write("3. Likely to be rejected: Probability < 0.5")
