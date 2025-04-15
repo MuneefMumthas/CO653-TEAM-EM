@@ -83,6 +83,7 @@ if submit_btn:
         "Loan_Income_Ratio": loan_income_ratio
     }])
 
+    st.dataframe(user_input)
     st.session_state.test_input = user_input
     st.session_state.test_submitted = True
 
