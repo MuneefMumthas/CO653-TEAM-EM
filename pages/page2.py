@@ -89,7 +89,7 @@ if submit_btn:
 
 # Encoding and Scaling
 if st.session_state.test_submitted:
-    st.dataframe(user_input)
+    st.dataframe(st.session_state.test_input)
     st.subheader("📋 Preprocess the input data")
 
     if st.button("Encode & Scale"):
@@ -135,7 +135,7 @@ if st.session_state.test_submitted:
 
 # Prediction
 if st.session_state.test_encoded:
-    st.dataframe(final_df)
+    st.dataframe(st.session_state.encoded_data)
 
     st.subheader("Predict Loan Status")
     if st.button("Predict"):
