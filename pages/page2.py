@@ -143,23 +143,31 @@ if st.session_state.test_encoded:
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
         
-        prediction_probability = model.predict(X_test)
+        prediction_score = model.predict(X_test)
         
         # probability for prediction
-        prediction_label = (prediction_probability > 0.5).astype(int)
+        prediction_label = (prediction_score > 0.5).astype(int)
 
         # Decode prediction as label_encoder was used during training
         predicted_class = label_encoder.inverse_transform(prediction_label.reshape(-1))[0]
 
         #class mapping
-        if predicted_class == "Y" and prediction_probability[0][0] > 0.75:
+        if predicted_class == "Y" and prediction_score[0][0] > 0.75:
             predicted_lable = "More likely to be approved"
-        elif predicted_class == "Y" and prediction_probability[0][0] > 0.5:
+        elif predicted_class == "Y" and prediction_score[0][0] > 0.5:
             predicted_lable = "Likely to be approved"
-        elif predicted_class == "N" and prediction_probability[0][0] < 0.5:
+        elif predicted_class == "N" and prediction_score[0][0] < 0.5:
             predicted_lable = "Likely to be rejected"
-        elif predicted_class == "N" and prediction_probability[0][0] < 0.25:
+        elif predicted_class == "N" and prediction_score[0][0] < 0.25:
             predicted_lable = "More likely to be rejected"
 
         st.success(f"🔮 Prediction: **{predicted_lable}**")
-        st.info(f"📊 Confidence Score: **{prediction_probability[0][0]:.2f}**")
+        st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
+        st.balloons()
+        st.write("Note: The prediction score is a probability value between 0 and 1. A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
+        st.markdown("---")
+        st.subheader("class mapping")
+        st.write("1. More likely to be approved: Probability > 0.75")
+        st.write("2. Likely to be approved: Probability > 0.5")
+        st.write("3. Likely to be rejected: Probability < 0.5")
+        st.write("4. More likely to be rejected: Probability < 0.25")
