@@ -143,8 +143,16 @@ if st.session_state.test_encoded:
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
         
-        prediction = model.predict(X_test)
+        prediction_probability = model.predict(X_test)
         
+        # probability for prediction
+        prediction_label = (prediction_probability > 0.5).astype(int)
 
-        st.success(f"🔮 Prediction: **{prediction}**")
-       
+        # Decode prediction if label_encoder was used during training
+        if label_encoder:
+            predicted_class = label_encoder.inverse_transform(prediction_label.reshape(-1))[0]
+        else:
+            predicted_class = "Approved" if prediction_label[0][0] == 1 else "Rejected"
+
+        st.success(f"🔮 Prediction: **{prediction_label}**")
+        st.info(f"📊 Confidence Score: **{prediction_probability[0][0]:.2f}**")
