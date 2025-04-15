@@ -4,11 +4,6 @@ import numpy as np
 import joblib
 import tensorflow as tf
 
-# Clear session state on page load
-for key in ["test_submitted", "test_encoded", "encoded_data", "test_input"]:
-    if key in st.session_state:
-        del st.session_state[key]
-
 # Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
 mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
