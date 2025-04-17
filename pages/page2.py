@@ -161,8 +161,9 @@ if st.session_state.test_encoded:
         elif predicted_class == "N" and prediction_score[0][0] < 0.25:
             predicted_lable = "More likely to be rejected"
 
+        expander1 = st.expander
 
-        with st.expander(f"🔮 Prediction: **{predicted_lable}**"):
+        with expander1(f"🔮 Prediction: **{predicted_lable}**"):
             st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
             st.write('''
                 Note: The prediction score is a probability value between 0 and 1. " \
