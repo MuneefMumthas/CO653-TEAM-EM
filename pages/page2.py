@@ -165,17 +165,18 @@ if st.session_state.test_encoded:
         expander1 = st.expander
         expander2 = st.expander
 
+        prediction_percentage = round(prediction_score[0][0] * 100, 2)
         # Display prediction result
         st.markdown("---")
         my_circular_progress = CircularProgress(
             label="Sample Bar",
-            value=(prediction_score[0][0] * 100),
+            value=prediction_percentage,
             key="my_circular_progress").st_circular_progress()
 
         st.markdown("---")
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
-            st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
+            st.info(f"📊 Prediction Score: **{prediction_percentage}**")
         #st.success(f"🔮 Prediction: **{predicted_lable}**")
         #st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
         #st.balloons()
@@ -184,7 +185,7 @@ if st.session_state.test_encoded:
         st.markdown("---")
         with expander2("How to read prediction score?"):
             st.subheader("Class mapping", anchor=False)
-            st.write("1.Prediction Score > 0.75:  More likely to be :green[approved]")
-            st.write("2.Prediction Score > 0.5: Likely to be :green[approved]")
-            st.write("3.Prediction Score < 0.5: Likely to be :red[rejected]")
-            st.write("4.Prediction Score < 0.25: More likely to be :red[rejected]")
+            st.write("1.Prediction Score greater than 75:  More likely to be :green[approved]")
+            st.write("2.Prediction Score greater than 50: Likely to be :green[approved]")
+            st.write("3.Prediction Score less than 50: Likely to be :red[rejected]")
+            st.write("4.Prediction Score less than 25: More likely to be :red[rejected]")
