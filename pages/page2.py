@@ -178,9 +178,7 @@ if st.session_state.test_encoded:
         st.markdown("---")
         with expander2("How to read prediction score?"):
             st.subheader("Class mapping", anchor=False)
-            st.write('''
-                1. More likely to be approved: Probability > 0.75 " \
-                2. Likely to be approved: Probability > 0.5 \
-                3. Likely to be rejected: Probability < 0.5 \
-                4. More likely to be rejected: Probability < 0.25
-            ''')
+            st.write("1. More likely to be approved: Probability > 0.75")
+            st.write("2. Likely to be approved: Probability > 0.5")
+            st.write("3. Likely to be rejected: Probability < 0.5")
+            st.write("4. More likely to be rejected: Probability < 0.25")
