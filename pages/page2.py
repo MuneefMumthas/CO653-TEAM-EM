@@ -165,7 +165,7 @@ if st.session_state.test_encoded:
         expander1 = st.expander
         expander2 = st.expander
 
-        prediction_percentage = round(prediction_score[0][0] * 100, 2)
+        prediction_percentage = int(round(prediction_score[0][0] * 100, 2))
         # Display prediction result
         st.markdown("---")
         my_circular_progress = CircularProgress(
