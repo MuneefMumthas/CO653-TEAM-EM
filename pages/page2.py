@@ -161,11 +161,18 @@ if st.session_state.test_encoded:
         elif predicted_class == "N" and prediction_score[0][0] < 0.25:
             predicted_lable = "More likely to be rejected"
 
-        st.success(f"🔮 Prediction: **{predicted_lable}**")
-        st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
-        st.balloons()
-        st.write("Note: The prediction score is a probability value between 0 and 1. " \
-        "A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
+
+        with st.expander(f"🔮 Prediction: **{predicted_lable}**"):
+            st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
+            st.write('''
+                Note: The prediction score is a probability value between 0 and 1. " \
+                A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).
+            ''')
+        #st.success(f"🔮 Prediction: **{predicted_lable}**")
+        #st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
+        #st.balloons()
+        #st.write("Note: The prediction score is a probability value between 0 and 1. " \
+        #"A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
         st.markdown("---")
         st.subheader("Class mapping", anchor=False)
         st.write("1. More likely to be approved: Probability > 0.75")
