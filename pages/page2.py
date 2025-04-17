@@ -182,7 +182,7 @@ if st.session_state.test_encoded:
             color=progress_colour,
             key="my_circular_progress").st_circular_progress()
 
-        my_circular_progress.update_values(progress=prediction_percentage)
+        
         st.markdown("---")
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
