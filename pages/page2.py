@@ -176,12 +176,13 @@ if st.session_state.test_encoded:
         # Display prediction result
         st.markdown("---")
         my_circular_progress = CircularProgress(
-            label="Sample Bar",
+            label="Prediction Score",
             value=prediction_percentage,
             size="Large",
             color=progress_colour,
             key="my_circular_progress").st_circular_progress()
 
+        my_circular_progress.update_values(progress=prediction_percentage)
         st.markdown("---")
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
