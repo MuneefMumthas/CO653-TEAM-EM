@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import tensorflow as tf
+from st_circular_progress import CircularProgress
 
 # Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
@@ -163,6 +164,16 @@ if st.session_state.test_encoded:
 
         expander1 = st.expander
         expander2 = st.expander
+
+        # Display prediction result
+        st.markdown("---")
+        circular_progress = CircularProgress(
+        label="Sample Bar",
+        value=((prediction_score[0][0])*100),
+        key="circular_progress")
+
+        circular_progress.st_circular_progress()
+        st.markdown("---")
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
             st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
