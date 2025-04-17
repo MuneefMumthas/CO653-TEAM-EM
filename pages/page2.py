@@ -155,12 +155,19 @@ if st.session_state.test_encoded:
         #class mapping
         if predicted_class == "Y" and prediction_score[0][0] > 0.75:
             predicted_lable = "More likely to be approved"
+            progress_colour = "green"
+
         elif predicted_class == "Y" and prediction_score[0][0] > 0.5:
             predicted_lable = "Likely to be approved"
+            progress_colour = "yellow"
+
         elif predicted_class == "N" and prediction_score[0][0] < 0.5:
             predicted_lable = "Likely to be rejected"
+            progress_colour = "orange"
+
         elif predicted_class == "N" and prediction_score[0][0] < 0.25:
             predicted_lable = "More likely to be rejected"
+            progress_colour = "red"
 
         expander1 = st.expander
         expander2 = st.expander
@@ -171,6 +178,8 @@ if st.session_state.test_encoded:
         my_circular_progress = CircularProgress(
             label="Sample Bar",
             value=prediction_percentage,
+            size="Large",
+            color=progress_colour,
             key="my_circular_progress").st_circular_progress()
 
         st.markdown("---")
