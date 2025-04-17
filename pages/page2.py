@@ -185,7 +185,7 @@ if st.session_state.test_encoded:
         st.markdown("---")
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
-            st.info(f"📊 Prediction Score: **{prediction_percentage}**")
+            st.info(f"📊 Prediction Score: **{prediction_score}**")
         #st.success(f"🔮 Prediction: **{predicted_lable}**")
         #st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
         #st.balloons()
