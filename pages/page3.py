@@ -134,3 +134,5 @@ if st.session_state.test_submitted:
         st.session_state.encoded_data = final_df
         
         st.session_state.test_encoded = True
+
+        st.dataframe(st.session_state.encoded_data)
