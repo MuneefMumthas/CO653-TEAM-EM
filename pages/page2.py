@@ -162,6 +162,7 @@ if st.session_state.test_encoded:
             predicted_lable = "More likely to be rejected"
 
         expander1 = st.expander
+        expander2 = st.expander
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
             st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
@@ -175,8 +176,11 @@ if st.session_state.test_encoded:
         #st.write("Note: The prediction score is a probability value between 0 and 1. " \
         #"A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
         st.markdown("---")
-        st.subheader("Class mapping", anchor=False)
-        st.write("1. More likely to be approved: Probability > 0.75")
-        st.write("2. Likely to be approved: Probability > 0.5")
-        st.write("3. Likely to be rejected: Probability < 0.5")
-        st.write("4. More likely to be rejected: Probability < 0.25")
+        with expander2("How to read prediction score?"):
+            st.subheader("Class mapping", anchor=False)
+            st.write('''
+                1. More likely to be approved: Probability > 0.75 " \
+                2. Likely to be approved: Probability > 0.5 \
+                3. Likely to be rejected: Probability < 0.5 \
+                4. More likely to be rejected: Probability < 0.25
+            ''')
