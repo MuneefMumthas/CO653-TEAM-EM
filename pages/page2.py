@@ -169,7 +169,7 @@ if st.session_state.test_encoded:
         st.markdown("---")
         circular_progress = CircularProgress(
         label="Sample Bar",
-        value=((prediction_score[0][0])*100),
+        value=0,
         key="circular_progress")
 
         circular_progress.st_circular_progress()
