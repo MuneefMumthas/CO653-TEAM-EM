@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import tensorflow as tf
 from st_circular_progress import CircularProgress
+import time
 
 # Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
@@ -176,12 +177,15 @@ if st.session_state.test_encoded:
         prediction_percentage = int(round(prediction_score[0][0] * 100, 2))
         # Display prediction result
         st.markdown("---")
+        unique_key = f"my_circular_progress_{int(time.time() * 1000)}"  # key changes every millisecond
+
         my_circular_progress = CircularProgress(
             label="Prediction Score",
             value=prediction_percentage,
             size="Large",
             color=progress_colour,
-            key="my_circular_progress").st_circular_progress()
+            key=unique_key  # this will force Streamlit to re-render it fully
+        ).st_circular_progress()
 
         
         st.markdown("---")
