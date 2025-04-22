@@ -141,6 +141,7 @@ if st.session_state.test_encoded:
 
     st.subheader("Predict Loan Status", anchor=False)
     if st.button("Predict"):
+        st.rerun()
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
         
