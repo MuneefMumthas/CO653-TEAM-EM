@@ -176,10 +176,10 @@ if st.session_state.test_submitted:
         st.dataframe(st.session_state.encoded_data)
 
         # Save to session and display
-st.session_state.encoded_data = final_df
-st.session_state.test_encoded = True
+        st.session_state.encoded_data = final_df
+        st.session_state.test_encoded = True
 
-st.dataframe(st.session_state.encoded_data)
+        st.dataframe(st.session_state.encoded_data)
 
 # New Predict button
 if st.button("Predict"):
