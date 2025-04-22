@@ -184,18 +184,26 @@ if st.session_state.test_submitted:
             fuzzy_percentage = int(round(fuzzy_result["fuzzy_score"] * 100, 2))
             fuzzy_class = fuzzy_result["class"]
 
-            if fuzzy_class == 1 and fuzzy_result["fuzzy_score"] > 0.75:
-                fuzzy_label = "More likely to be approved"
-                fuzzy_colour = "green"
-            elif fuzzy_class == 1 and fuzzy_result["fuzzy_score"] > 0.5:
-                fuzzy_label = "Likely to be approved"
-                fuzzy_colour = "yellow"
-            elif fuzzy_class == 0 and fuzzy_result["fuzzy_score"] < 0.5:
-                fuzzy_label = "Likely to be rejected"
-                fuzzy_colour = "orange"
-            elif fuzzy_class == 0 and fuzzy_result["fuzzy_score"] < 0.25:
-                fuzzy_label = "More likely to be rejected"
-                fuzzy_colour = "red"
+            if fuzzy_class == 1:
+                if fuzzy_result["fuzzy_score"] >= 0.75:
+                    fuzzy_label = "More likely to be approved"
+                    fuzzy_colour = "green"
+                elif fuzzy_result["fuzzy_score"] >= 0.5:
+                    fuzzy_label = "Likely to be approved"
+                    fuzzy_colour = "yellow"
+                else:
+                    fuzzy_label = "Possibly approved"
+                    fuzzy_colour = "orange"
+            elif fuzzy_class == 0:
+                if fuzzy_result["fuzzy_score"] >= 0.75:
+                    fuzzy_label = "More likely to be rejected"
+                    fuzzy_colour = "red"
+                elif fuzzy_result["fuzzy_score"] >= 0.5:
+                    fuzzy_label = "Likely to be rejected"
+                    fuzzy_colour = "orange"
+                else:
+                    fuzzy_label = "Possibly rejected"
+                    fuzzy_colour = "gray"
             else:
                 fuzzy_label = "Uncertain"
                 fuzzy_colour = "gray"
