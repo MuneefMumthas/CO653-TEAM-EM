@@ -180,24 +180,45 @@ if st.session_state.test_submitted:
 
         if fuzzy_result:
             # Fuzzy score-based progress colour
-            fuzzy_colour = (
-                "green" if fuzzy_result["fuzzy_score"] >= 0.75 else
-                "yellow" if fuzzy_result["fuzzy_score"] >= 0.5 else
-                "orange" if fuzzy_result["fuzzy_score"] >= 0.25 else
-                "red"
-            )
+            # Fuzzy score-based progress colour and label
             fuzzy_percentage = int(round(fuzzy_result["fuzzy_score"] * 100, 2))
+            fuzzy_class = fuzzy_result["class"]
 
-            # Display fuzzy circular progress
+            if fuzzy_class == 1 and fuzzy_result["fuzzy_score"] > 0.75:
+                fuzzy_label = "More likely to be approved"
+                fuzzy_colour = "green"
+            elif fuzzy_class == 1 and fuzzy_result["fuzzy_score"] > 0.5:
+                fuzzy_label = "Likely to be approved"
+                fuzzy_colour = "yellow"
+            elif fuzzy_class == 0 and fuzzy_result["fuzzy_score"] < 0.5:
+                fuzzy_label = "Likely to be rejected"
+                fuzzy_colour = "orange"
+            elif fuzzy_class == 0 and fuzzy_result["fuzzy_score"] < 0.25:
+                fuzzy_label = "More likely to be rejected"
+                fuzzy_colour = "red"
+            else:
+                fuzzy_label = "Uncertain"
+                fuzzy_colour = "gray"
+
+            # Display circular progress
             fuzzy_key = f"fuzzy_progress_{int(time.time() * 1000)}"
-            st.markdown("#### 🧠 Fuzzy Rule Confidence Score")
+            st.markdown("### 🧠 Fuzzy Logic Result")
             CircularProgress(
-                label="Fuzzy Confidence",
+                label="Fuzzy Rule Confidence",
                 value=fuzzy_percentage,
                 size="Large",
                 color=fuzzy_colour,
                 key=fuzzy_key
             ).st_circular_progress()
+
+            # Display in expandable box
+            with st.expander(f"🔮 Fuzzy Logic Prediction: **{fuzzy_label} ({fuzzy_percentage}%)**"):
+                st.info(f"📊 Rule Confidence Score: **{fuzzy_percentage}%**")
+                st.markdown(f"**Match Confidence**: `{fuzzy_result['score']}`")
+                st.markdown(f"**Rule Support (samples)**: `{fuzzy_result['samples']}`")
+                st.markdown("**📄 Conditions in Fuzzy Rule:**")
+                for cond in fuzzy_result["conditions"]:
+                    st.markdown(f"- `{cond[0]} {cond[1]} {cond[2]}`")
 
             with st.expander("🧠 Fuzzy Logic Analysis (Rule-based Reasoning)"):
                 if fuzzy_result:
