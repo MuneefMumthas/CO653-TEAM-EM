@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import tensorflow as tf
+from st_circular_progress import CircularProgress
 
 # Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
@@ -174,7 +175,7 @@ if st.session_state.test_submitted:
         st.dataframe(st.session_state.encoded_data)
 
         # Fuzzy logic analysis
-        fuzzy_result = evaluate_fuzzy_rules(X_test.iloc[0], rules)
+        fuzzy_result = evaluate_fuzzy_rules(final_df.iloc[0], rules)
 
         if fuzzy_result:
             # Fuzzy score-based progress colour
