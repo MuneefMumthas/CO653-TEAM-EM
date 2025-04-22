@@ -230,13 +230,15 @@ if st.session_state.test_submitted:
 
             with st.expander("🧠 Fuzzy Logic Analysis (Rule-based Reasoning)"):
                 if fuzzy_result:
-                    human_readable = "approved" if fuzzy_result["class"] == 1 else "rejected"
+                    fuzzy_class = fuzzy_result["class"]
+                    human_readable = "approved" if fuzzy_class == 1 else "rejected"
+
                     st.markdown(f"### 🔍 This application is also **{human_readable}** based on fuzzy rules.")
+                    st.markdown(f"**🧠 Fuzzy Rule Class**: `{fuzzy_class}` (`{'approved' if fuzzy_class == 1 else 'rejected'}`)")
                     st.markdown(f"**Fuzzy Confidence Match**: `{fuzzy_result['score']}`")
                     st.markdown(f"**Fuzzy Rule Strength**: `{fuzzy_result['fuzzy_score']}`")
                     st.markdown(f"**Rule Support (samples used to form this rule)**: `{fuzzy_result['samples']}`")
 
-                    # Display matched conditions without nesting
                     st.markdown("**📄 Matched Conditions in Rule:**")
                     for cond in fuzzy_result["conditions"]:
                         st.markdown(f"- `{cond[0]} {cond[1]} {cond[2]}`")
