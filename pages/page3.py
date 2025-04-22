@@ -183,7 +183,7 @@ st.dataframe(st.session_state.encoded_data)
 
 # New Predict button
 if st.button("Predict"):
-    fuzzy_result = evaluate_fuzzy_rules(final_df.iloc[0], rules)
+    fuzzy_result = evaluate_fuzzy_rules(st.session_state.encoded_data.iloc[0], rules)
 
     if fuzzy_result:
         fuzzy_percentage = int(round(fuzzy_result["fuzzy_score"] * 100, 2))
