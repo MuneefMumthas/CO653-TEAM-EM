@@ -4,6 +4,7 @@ import numpy as np
 import joblib
 import tensorflow as tf
 from st_circular_progress import CircularProgress
+import time
 
 # Load Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
