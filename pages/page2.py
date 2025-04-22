@@ -141,12 +141,12 @@ if st.session_state.test_encoded:
 
     st.subheader("Predict Loan Status", anchor=False)
     if st.button("Predict"):
-        st.rerun()
         # Prepare input for prediction
         X_test = st.session_state.encoded_data.copy()
         
-        prediction_score = model.predict(X_test)
-        
+        st.session_state.prediction_score = model.predict(X_test)
+
+        prediction_score = st.session_state.prediction_score
         # probability for prediction
         prediction_label = (prediction_score > 0.5).astype(int)
 
