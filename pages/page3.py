@@ -28,24 +28,19 @@ def evaluate_fuzzy_rules(input_row, rules):
     for rule in rules:
         score = 0
         total = len(rule['conditions'])
-        match = True
+        match_count = 0
 
         for condition in rule['conditions']:
             feature, op, value = condition
             if feature not in input_row:
-                match = False
-                break
+                continue
             feature_val = input_row[feature]
+            if op == '<=' and feature_val <= value:
+                match_count += 1
+            elif op == '>' and feature_val > value:
+                match_count += 1
 
-            if op == '<=' and not feature_val <= value:
-                match = False
-            elif op == '>' and not feature_val > value:
-                match = False
-
-            if match:
-                score += 1
-
-        confidence = score / total
+        confidence = match_count / total
         if confidence > max_score:
             max_score = confidence
             matched_rule = rule
@@ -53,7 +48,7 @@ def evaluate_fuzzy_rules(input_row, rules):
     if matched_rule:
         return {
             "class": matched_rule["class"],
-            "score": max_score,
+            "score": round(max_score, 2),
             "fuzzy_score": matched_rule["fuzzy_score"],
             "conditions": matched_rule["conditions"],
             "samples": matched_rule["samples"]
@@ -178,19 +173,40 @@ if st.session_state.test_submitted:
 
         st.dataframe(st.session_state.encoded_data)
 
-        # Apply fuzzy rules
-        fuzzy_result = evaluate_fuzzy_rules(st.session_state.encoded_data.iloc[0], rules)
+        # Fuzzy logic analysis
+        fuzzy_result = evaluate_fuzzy_rules(X_test.iloc[0], rules)
 
         if fuzzy_result:
-            st.subheader("🔍 Fuzzy Logic Prediction", anchor=False)
-            st.markdown(f"**Predicted Class**: `{fuzzy_result['class']}`")
-            st.markdown(f"**Matching Confidence**: `{round(fuzzy_result['score'], 2)}`")
-            st.markdown(f"**Fuzzy Score from Rule**: `{fuzzy_result['fuzzy_score']}`")
-            st.markdown(f"**Samples Represented by Rule**: `{fuzzy_result['samples']}`")
+            # Fuzzy score-based progress colour
+            fuzzy_colour = (
+                "green" if fuzzy_result["fuzzy_score"] >= 0.75 else
+                "yellow" if fuzzy_result["fuzzy_score"] >= 0.5 else
+                "orange" if fuzzy_result["fuzzy_score"] >= 0.25 else
+                "red"
+            )
+            fuzzy_percentage = int(round(fuzzy_result["fuzzy_score"] * 100, 2))
 
-            with st.expander("Matched Conditions"):
-                for cond in fuzzy_result["conditions"]:
-                    st.markdown(f"`{cond[0]} {cond[1]} {cond[2]}`")
+            # Display fuzzy circular progress
+            fuzzy_key = f"fuzzy_progress_{int(time.time() * 1000)}"
+            st.markdown("#### 🧠 Fuzzy Rule Confidence Score")
+            CircularProgress(
+                label="Fuzzy Confidence",
+                value=fuzzy_percentage,
+                size="Large",
+                color=fuzzy_colour,
+                key=fuzzy_key
+            ).st_circular_progress()
+
+            with st.expander("🧠 Fuzzy Logic Analysis (Rule-based Reasoning)"):
+                if fuzzy_result:
+                    human_readable = "approved" if fuzzy_result["class"] == 1 else "rejected"
+                    st.markdown(f"### 🔍 This application is also **{human_readable}** based on fuzzy rules.")
+                    st.markdown(f"**Fuzzy Confidence Match**: `{fuzzy_result['score']}`")
+                    st.markdown(f"**Fuzzy Rule Strength**: `{fuzzy_result['fuzzy_score']}`")
+                    st.markdown(f"**Rule Support (samples used to form this rule)**: `{fuzzy_result['samples']}`")
+                    with st.expander("📄 Matched Conditions in Rule"):
+                        for cond in fuzzy_result["conditions"]:
+                            st.markdown(f"- `{cond[0]} {cond[1]} {cond[2]}`")
         else:
             st.warning("No matching fuzzy rule found.")
 
