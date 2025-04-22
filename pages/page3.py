@@ -20,6 +20,47 @@ if "encoded_data" not in st.session_state:
 
 from rules import rules
 
+def evaluate_fuzzy_rules(input_row, rules):
+    best_match = None
+    max_score = 0
+    matched_rule = None
+
+    for rule in rules:
+        score = 0
+        total = len(rule['conditions'])
+        match = True
+
+        for condition in rule['conditions']:
+            feature, op, value = condition
+            if feature not in input_row:
+                match = False
+                break
+            feature_val = input_row[feature]
+
+            if op == '<=' and not feature_val <= value:
+                match = False
+            elif op == '>' and not feature_val > value:
+                match = False
+
+            if match:
+                score += 1
+
+        confidence = score / total
+        if confidence > max_score:
+            max_score = confidence
+            matched_rule = rule
+
+    if matched_rule:
+        return {
+            "class": matched_rule["class"],
+            "score": max_score,
+            "fuzzy_score": matched_rule["fuzzy_score"],
+            "conditions": matched_rule["conditions"],
+            "samples": matched_rule["samples"]
+        }
+    else:
+        return None
+
 st.title("Fuzzy Logic 📝")
 
 st.markdown("---")
@@ -136,6 +177,22 @@ if st.session_state.test_submitted:
         st.session_state.test_encoded = True
 
         st.dataframe(st.session_state.encoded_data)
+
+        # Apply fuzzy rules
+        fuzzy_result = evaluate_fuzzy_rules(st.session_state.encoded_data.iloc[0], rules)
+
+        if fuzzy_result:
+            st.subheader("🔍 Fuzzy Logic Prediction", anchor=False)
+            st.markdown(f"**Predicted Class**: `{fuzzy_result['class']}`")
+            st.markdown(f"**Matching Confidence**: `{round(fuzzy_result['score'], 2)}`")
+            st.markdown(f"**Fuzzy Score from Rule**: `{fuzzy_result['fuzzy_score']}`")
+            st.markdown(f"**Samples Represented by Rule**: `{fuzzy_result['samples']}`")
+
+            with st.expander("Matched Conditions"):
+                for cond in fuzzy_result["conditions"]:
+                    st.markdown(f"`{cond[0]} {cond[1]} {cond[2]}`")
+        else:
+            st.warning("No matching fuzzy rule found.")
 
 
         
