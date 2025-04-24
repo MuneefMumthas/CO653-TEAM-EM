@@ -21,7 +21,8 @@ col1, col2 = st.columns(2)
 with col1:
     with st.container(border=True):
         st.subheader("Entwan",anchor=False)
-        st.write("Final year AI student.")
+        st.write("Artificial Intelligence engineer | Data Scientist.")
+        st.write("🇬🇧🤝🏻🇲🇳")
         st.markdown(
             f"""
             <style>
@@ -53,7 +54,8 @@ with col1:
 with col2:
     with st.container(border=True):
         st.subheader("Muneef", anchor=False)
-        st.write("Final year AI student.")
+        st.write("AI Student | Passionate about Integrating AI into Apps, Games & Businesses")
+        st.write("🇬🇧🤝🏻🇱🇰")
         st.markdown(
             f"""
             <style>
