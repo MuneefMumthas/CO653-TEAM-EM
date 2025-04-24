@@ -32,8 +32,8 @@ fuzzy = st.Page(
 
 outcome = st.Page(
     page = "pages/page4.py",
-    title= "Outcome",
-    icon = "🏷️"
+    title= "Authors",
+    icon = "🫂"
 )
 
 
