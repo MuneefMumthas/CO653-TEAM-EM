@@ -3,7 +3,8 @@ import pandas as pd
 import time
 import base64
 
-st.title("Outcome 🤞")
+github_logo="github-mark-white.png"
+st.title(f"GitHub {github_logo}")
 
 st.markdown("---")
 
