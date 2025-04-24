@@ -57,7 +57,6 @@ with col5:
 with col6:
     st.markdown(
         f"""
-        <h3 style="text-align: right; margin-bottom: 0;">Muneef Mumthas</h3>
         <div style="display: flex; justify-content: right; align-items: center; text-align: center; margin-top: 10px;">
             <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                 <img src="data:image/png;base64,{git}" 
@@ -65,11 +64,6 @@ with col6:
                     style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
             </a>
         </div>
-        <style>
-            img:hover {{
-                transform: scale(1.1);
-            }}
-        </style>
         """,
         unsafe_allow_html=True
     )
