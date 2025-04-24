@@ -25,7 +25,6 @@ with col2:
     st.markdown(
         f"""
         <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 10px;">
-        {st.subheader("Entwan")}
             <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                 <img src="data:image/png;base64,{git}" 
                     alt="github" 
@@ -41,7 +40,6 @@ with col3:
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 10px;">
-        {st.subheader("Muneef")}
             <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                 <img src="data:image/png;base64,{git}" 
                     alt="github" 
