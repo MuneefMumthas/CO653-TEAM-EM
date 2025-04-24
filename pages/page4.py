@@ -3,7 +3,7 @@ import pandas as pd
 import time
 import base64
 
-git_logo_url = "assets/github-mark-white.png"
+git_logo_url = "assets/github-mark.png"
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
@@ -25,7 +25,7 @@ with col2:
                 <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 40px; height: auto; cursor: pointer; transition: transform 0.2s ease-in-out;">
+                        style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             <style>
@@ -43,7 +43,7 @@ with col3:
                 <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 40px; height: auto; cursor: pointer; transition: transform 0.2s ease-in-out;">
+                        style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             <style>
