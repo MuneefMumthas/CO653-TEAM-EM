@@ -232,18 +232,6 @@ if st.session_state.test_encoded:
                 for cond in fuzzy_result["conditions"]:
                     st.markdown(f"- `{cond[0]} {cond[1]} {cond[2]}`")
 
-            # Detailed explanation expander
-            with st.expander("🧠 Fuzzy Logic Analysis (Rule-based Reasoning)"):
-                human_readable = "approved" if fuzzy_class == 1 else "rejected"
-                st.markdown(f"### 🔍 This application is also **{human_readable}** based on fuzzy rules.")
-                st.markdown(f"**🧠 Fuzzy Rule Class**: `{fuzzy_class}` (`{human_readable}`)")
-                st.markdown(f"**Fuzzy Confidence Match**: `{fuzzy_result['score']}`")
-                st.markdown(f"**Fuzzy Rule Strength**: `{fuzzy_result['fuzzy_score']}`")
-                st.markdown(f"**Rule Support (samples used to form this rule)**: `{fuzzy_result['samples']}`")
-
-                st.markdown("**📄 Matched Conditions in Rule:**")
-                for cond in fuzzy_result["conditions"]:
-                    st.markdown(f"- `{cond[0]} {cond[1]} {cond[2]}`")
         else:
             st.warning("No matching fuzzy rule found.")
 
