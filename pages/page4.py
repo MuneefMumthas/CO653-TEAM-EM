@@ -3,10 +3,59 @@ import pandas as pd
 import time
 import base64
 
-Git_logo_url = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+git_logo_url = "assets/github-black.png"
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
 
-st.title(f"GitHub {st.image(Git_logo_url, width=40)}")
+# Convert image to Base64
 
-st.markdown("---")
+git = get_base64_image(git_logo_url)
+
+st.title("Authors")
+# Create two columns
+col1,col2,col3,col4 = st.columns(4)
+
+with col1: 
+    pass
+with col2:
+    st.markdown(
+                f"""
+            <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 20px;">
+                <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
+                    <img src="data:image/png;base64,{git}" 
+                        alt="github" 
+                        style="width: 40px; height: auto; cursor: pointer; transition: transform 0.2s ease-in-out;">
+                </a>
+            </div>
+            <style>
+                img:hover {{
+                    transform: scale(1.1);
+                }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+with col3:
+    st.markdown(
+                f"""
+            <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 20px;">
+                <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
+                    <img src="data:image/png;base64,{git}" 
+                        alt="github" 
+                        style="width: 40px; height: auto; cursor: pointer; transition: transform 0.2s ease-in-out;">
+                </a>
+            </div>
+            <style>
+                img:hover {{
+                    transform: scale(1.1);
+                }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+    
+with col4:
+    pass
 
 st.write("something here...")
