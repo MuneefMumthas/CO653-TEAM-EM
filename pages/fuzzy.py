@@ -110,3 +110,6 @@ if submit_btn:
 
     st.session_state.test_input = user_input
     st.session_state.test_submitted = True
+    
+if st.session_state.test_submitted:
+    st.dataframe(st.session_state.test_input)
