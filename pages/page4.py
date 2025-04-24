@@ -15,40 +15,17 @@ git = get_base64_image(git_logo_url)
 st.title("Authors")
 # Create two columns
 col1,col2,col3,col4 = st.columns(4)
-col5,col6,col7,col8 = st.columns(4)
+
 
 with col1: 
     pass
+
 with col2:
-    st.markdown(f"""
-                <h3 style="text-align: center; margin-bottom: 0;">Entwan Enkhbayar</h3>
-                <style>
-                    img:hover {{
-                        transform: scale(1.1);
-                    }}
-                </style>""", unsafe_allow_html=True)
-
-
-
-with col3:
-    st.markdown(f"""
-                <h3 style="text-align: center; margin-bottom: 0;">Entwan Enkhbayar</h3>
-                <style>
-                    img:hover {{
-                        transform: scale(1.1);
-                    }}
-                </style>""", unsafe_allow_html=True)
-
-with col4: 
-    pass
-
-with col5:
-    pass
-
-with col6:
+    
     st.markdown(
         f"""
         <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 10px;">
+        {st.subheader("Entwan")}
             <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                 <img src="data:image/png;base64,{git}" 
                     alt="github" 
@@ -60,10 +37,11 @@ with col6:
         unsafe_allow_html=True
     )
 
-with col7:
+with col3:
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 10px;">
+        {st.subheader("Muneef")}
             <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                 <img src="data:image/png;base64,{git}" 
                     alt="github" 
@@ -74,5 +52,5 @@ with col7:
         unsafe_allow_html=True
     )
     
-with col8:
+with col4:
     pass
