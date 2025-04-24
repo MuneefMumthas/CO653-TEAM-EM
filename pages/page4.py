@@ -18,7 +18,7 @@ col1,col2,col3,col4 = st.columns(4)
 col5,col6,col7 = st.columns(3)
 
 with col5:
-    st.subheader("Entwan Enkhbayar",anchor=False)
+    st.subheader("Entwan Enkhbayar*",anchor=False)
 
 with col6:
     pass
