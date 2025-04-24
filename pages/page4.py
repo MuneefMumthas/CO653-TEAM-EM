@@ -21,7 +21,7 @@ with col1:
     pass
 
 with col2:
-    
+    st.subheader("Entwan")
     st.markdown(
         f"""
         <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 10px;">
@@ -37,6 +37,7 @@ with col2:
     )
 
 with col3:
+    st.subheader("Muneef")
     st.markdown(
         f"""
         <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 10px;">
