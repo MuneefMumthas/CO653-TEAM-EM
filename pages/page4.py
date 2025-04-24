@@ -5,6 +5,7 @@ import base64
 
 git_logo_url = "assets/github-mark.png"
 linkedin = "assets/linkedin.png"
+email = "assets/email.png"
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
@@ -13,6 +14,7 @@ def get_base64_image(image_path):
 
 git = get_base64_image(git_logo_url)
 linkedin = get_base64_image(linkedin)
+email = get_base64_image(email)
 st.title("Authors")
 
 # Create two side-by-side columns
@@ -22,7 +24,6 @@ with col1:
     with st.container(border=True):
         st.subheader("Entwan",anchor=False)
         st.write("Artificial Intelligence engineer | Data Scientist.")
-        st.write("🇬🇧🤝🏻🇲🇳")
         st.markdown(
             f"""
             <style>
@@ -46,6 +47,11 @@ with col1:
                         alt="LinkedIn" 
                         style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
+                <a href="mailto:enkhamgalan.entwan@outlook.com">
+                    <img src="data:image/png;base64,{email}" 
+                        alt="Email" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
+                </a>
             </div>
             """,
             unsafe_allow_html=True
@@ -55,7 +61,6 @@ with col2:
     with st.container(border=True):
         st.subheader("Muneef", anchor=False)
         st.write("AI Student | Passionate about Integrating AI into Apps, Games & Businesses")
-        st.write("🇬🇧🤝🏻🇱🇰")
         st.markdown(
             f"""
             <style>
@@ -77,6 +82,11 @@ with col2:
                 <a href="https://www.linkedin.com/in/muneefmumthas/?originalSubdomain=uk" target="_blank">
                     <img src="data:image/png;base64,{linkedin}" 
                         alt="LinkedIn" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
+                </a>
+                <a href="mailto:muneefmumthas1431@gmail.com">
+                    <img src="data:image/png;base64,{email}" 
+                        alt="Email" 
                         style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
             </div>
