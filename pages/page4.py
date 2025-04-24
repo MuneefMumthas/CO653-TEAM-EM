@@ -23,7 +23,7 @@ col1, col2 = st.columns(2)
 with col1:
     with st.container(border=True):
         st.subheader("Entwan",anchor=False)
-        st.write("Artificial Intelligence engineer | Data Scientist.")
+        st.write("Artificial Intelligence engineer | Data Scientist. I hate coding but mom told me to, so..")
         st.markdown(
             f"""
             <style>
