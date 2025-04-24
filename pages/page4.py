@@ -20,20 +20,30 @@ col1, col2 = st.columns(2)
 
 with col1:
     with st.container(border=True):
-        st.subheader("Entwan")
+        st.subheader("Entwan",anchor=False)
         st.write("Final year AI student.")
         st.markdown(
             f"""
-            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
-                <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
+            <style>
+                .icon-container a img {{
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }}
+                .icon-container a:hover img {{
+                    transform: scale(1.15);
+                    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+                }}
+            </style>
+
+            <div class="icon-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
+                <a href="https://github.com/Enkhamgalan1230" target="_blank">
                     <img src="data:image/png;base64,{git}" 
-                        alt="github" 
-                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        alt="GitHub" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
-                <a href="https://www.linkedin.com/in/entwan/" target="_blank" style="text-decoration: none;">
+                <a href="https://www.linkedin.com/in/entwan/" target="_blank">
                     <img src="data:image/png;base64,{linkedin}" 
-                        alt="linkedin" 
-                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        alt="LinkedIn" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
             </div>
             """,
@@ -42,20 +52,30 @@ with col1:
 
 with col2:
     with st.container(border=True):
-        st.subheader("Muneef")
+        st.subheader("Muneef", anchor=False)
         st.write("Final year AI student.")
         st.markdown(
             f"""
-            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
-                <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
+            <style>
+                .icon-container a img {{
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }}
+                .icon-container a:hover img {{
+                    transform: scale(1.15);
+                    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+                }}
+            </style>
+
+            <div class="icon-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
+                <a href="https://github.com/MuneefMumthas" target="_blank">
                     <img src="data:image/png;base64,{git}" 
-                        alt="github" 
-                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        alt="GitHub" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
-                <a href="https://www.linkedin.com/in/muneefmumthas/?originalSubdomain=uk" target="_blank" style="text-decoration: none;">
+                <a href="https://www.linkedin.com/in/muneefmumthas/?originalSubdomain=uk" target="_blank">
                     <img src="data:image/png;base64,{linkedin}" 
-                        alt="linkedin" 
-                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        alt="LinkedIn" 
+                        style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
             </div>
             """,
