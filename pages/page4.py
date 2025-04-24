@@ -31,7 +31,7 @@ with col2:
                 <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 50px; height: 50px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             
@@ -48,7 +48,7 @@ with col3:
                 <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 100px; height: 100px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 50px; height: 50px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             """,
