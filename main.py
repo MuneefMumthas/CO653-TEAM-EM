@@ -36,7 +36,7 @@ outcome = st.Page(
     icon = "🫂"
 )
 
-fuzz2 = st.Page(
+fuz = st.Page(
     page = "pages/fuzzy.py",
     title= "Fuzzy",
     icon = "📝"
