@@ -19,7 +19,7 @@ col4,col5,col6,col7 = st.columns(4)
 
 with col1:
     st.markdown(f"""
-                <h3 style="text-align: left; margin-bottom: 0;">Entwan Enkhbayar</h3>
+                <h3 style="text-align: center; margin-bottom: 0;">Entwan Enkhbayar</h3>
                 <style>
                     img:hover {{
                         transform: scale(1.1);
@@ -31,7 +31,7 @@ with col2:
 
 with col3:
     st.markdown(f"""
-                <h3 style="text-align: left; margin-bottom: 0;">Entwan Enkhbayar</h3>
+                <h3 style="text-align: center; margin-bottom: 0;">Entwan Enkhbayar</h3>
                 <style>
                     img:hover {{
                         transform: scale(1.1);
