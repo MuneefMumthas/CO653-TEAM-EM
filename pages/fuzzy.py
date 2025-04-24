@@ -20,20 +20,56 @@ with st.form(key="loan_form"):
     dependents = st.selectbox("Dependents", ['Select', '0', '1', '2', '3+'])
     education = st.selectbox("Education", ['Select', 'Graduate', 'Not Graduate'])
     self_employed = st.selectbox("Self Employed", ['Select', 'Yes', 'No'])
-    applicant_income = st.number_input("Applicant Income", min_value=0)
-    coapplicant_income = st.number_input("Coapplicant Income", min_value=0)
-    loan_amount = st.number_input("Loan Amount (in thousands)", min_value=0)
-    loan_term = st.selectbox("Loan Amount Term (months)", ['Select', 12.0, 36.0, 60.0, 84.0, 120.0, 180.0, 240.0, 360.0, 480.0])
+    applicant_income = st.number_input("Applicant Income (Monthly)", min_value=0)
+    coapplicant_income = st.number_input("Coapplicant Income (Monthly)", min_value=0)
+    loan_amount = st.number_input("Loan Amount", min_value=0)
+    loan_term = st.selectbox("Loan Amount Term (Months)", ['Select', 12.0, 36.0, 60.0, 84.0, 120.0, 180.0, 240.0, 360.0, 480.0])
     credit_history = st.selectbox("Credit History", ['Select', "Good", "Poor"])
     property_area = st.selectbox("Property Area", ['Select', 'Urban', 'Semiurban', 'Rural'])
 
     submit_btn = st.form_submit_button("Submit")
 
-# Input Validation
-if credit_history == "Good":
-    credit_history = 1.0
-elif credit_history == "Poor":
-    credit_history = 0.0
+
+# Converting applicant income to category
+if applicant_income <1500:
+    applicant_income = 'Low'
+
+elif applicant_income <= 4000:
+    applicant_income = 'Medium'
+
+elif applicant_income > 4000:
+    applicant_income = 'High'
+
+
+# Converting applicant income to category
+if coapplicant_income <1500:
+    coapplicant_income = 'Low'
+
+elif coapplicant_income <= 4000:
+    coapplicant_income = 'Medium'
+
+elif coapplicant_income > 4000:
+    coapplicant_income = 'High'
+
+# Converting loan amount to category
+if loan_amount < 50000:
+    loan_amount = 'Low'
+
+elif loan_amount <= 150000:
+    loan_amount = 'Medium'
+
+elif loan_amount > 150000:
+    loan_amount = 'High'
+
+# Converting loan term to category
+if loan_term < 60:
+    loan_term = 'Short'
+
+elif loan_term <= 120:
+    loan_term = 'Medium'
+
+elif loan_term > 120:
+    loan_term = 'Long'
 
 if submit_btn:
     # Check for missing fields
@@ -51,9 +87,6 @@ if submit_btn:
         st.error(f"Missing: {', '.join(missing)}", icon="🚨")
         st.stop()
 
-    # Derived fields
-    total_income = applicant_income + coapplicant_income
-    loan_income_ratio = loan_amount / total_income
 
     # Input as DataFrame
     user_input = pd.DataFrame([{
@@ -68,8 +101,6 @@ if submit_btn:
         "Loan_Amount_Term": loan_term,
         "Credit_History": credit_history,
         "Property_Area": property_area,
-        "TotalIncome": total_income,
-        "Loan_Income_Ratio": loan_income_ratio
     }])
 
     st.session_state.test_input = user_input
