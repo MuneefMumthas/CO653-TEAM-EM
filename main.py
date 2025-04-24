@@ -36,6 +36,12 @@ outcome = st.Page(
     icon = "🏷️"
 )
 
+fuzz2 = st.Page(
+    page = "pages/fuzzy.py",
+    title= "Fuzzy Logic",
+    icon = "📝"
+)
+
 
 
 pg = st.navigation(
