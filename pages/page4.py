@@ -14,22 +14,14 @@ git = get_base64_image(git_logo_url)
 
 st.title("Authors")
 # Create two columns
+col1,col2, = st.columns(2)
 col4,col5,col6,col7 = st.columns(4)
-col1,col2,col3 = st.columns(3)
 
-
-with col1:
-    st.subheader("Entwan Enkhbayar",anchor=False)
-
-with col2:
-    pass
-
-with col3:
-    st.subheader("Muneef Mumthas", anchor=False)
 
 with col4: 
     pass
 with col5:
+    st.subheader("Entwan Enkhbayar",anchor=False)
     st.markdown(
                 f"""
             <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 20px;">
@@ -48,6 +40,7 @@ with col5:
             unsafe_allow_html=True
         )
 with col6:
+    st.subheader("Muneef Mumthas", anchor=False)
     st.markdown(
                 f"""
             <div style="display: flex; justify-content: right; align-items: center; text-align: center; margin-top: 20px;">
