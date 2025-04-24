@@ -47,7 +47,7 @@ fuz = st.Page(
 pg = st.navigation(
     {
         "Info": [home_page],
-        "Models":[nn,fuzzy,fuz],
+        "Models":[nn,fuzzy],
         "Comparison": [outcome]
     }
 )
