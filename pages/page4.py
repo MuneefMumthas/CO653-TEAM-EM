@@ -15,6 +15,16 @@ git = get_base64_image(git_logo_url)
 st.title("Authors")
 # Create two columns
 col1,col2,col3,col4 = st.columns(4)
+col5,col6,col7 = st.columns(3)
+
+with col5:
+    st.subheader("Entwan Enkhbayar",anchor=False)
+
+with col6:
+    pass
+
+with col7:
+    st.subheader("Muneef Mumthas", anchor=False)
 
 with col1: 
     pass
@@ -57,5 +67,3 @@ with col3:
     
 with col4:
     pass
-
-st.write("something here...")
