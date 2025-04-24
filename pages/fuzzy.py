@@ -11,6 +11,10 @@ st.title("new fuzzy", anchor=False)
 st.markdown("---")
 st.title("Loan Approval Prediction", anchor=False)
 
+# Session States
+if "test_submitted" not in st.session_state:
+    st.session_state.test_submitted = False
+
 # Input Form
 with st.form(key="loan_form"):
     st.subheader("Enter Applicant Details", anchor=False)
