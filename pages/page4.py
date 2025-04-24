@@ -28,12 +28,12 @@ with col1:
                 <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 40px; height: 40px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
                 <a href="https://www.linkedin.com/in/entwan/" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{linkedin}" 
                         alt="linkedin" 
-                        style="width: 40px; height: 40px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             """,
@@ -50,12 +50,12 @@ with col2:
                 <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 40px; height: 40px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
                 <a href="https://www.linkedin.com/in/muneefmumthas/?originalSubdomain=uk" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{linkedin}" 
                         alt="linkedin" 
-                        style="width: 40px; height: 40px; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 70px; height: 70px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             """,
