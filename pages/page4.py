@@ -3,7 +3,7 @@ import pandas as pd
 import time
 import base64
 
-git_logo_url = "assets/github-black.png"
+git_logo_url = "assets/github-mark-white.png"
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
