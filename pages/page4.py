@@ -22,7 +22,7 @@ with col2:
     st.markdown(
                 f"""
             <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 20px;">
-                <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
+                <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
                         style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
@@ -40,7 +40,7 @@ with col3:
     st.markdown(
                 f"""
             <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 20px;">
-                <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
+                <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
                         style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
