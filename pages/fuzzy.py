@@ -23,7 +23,7 @@ with st.form(key="loan_form"):
     applicant_income = st.number_input("Applicant Income (Monthly)", min_value=0)
     coapplicant_income = st.number_input("Coapplicant Income (Monthly)", min_value=0)
     loan_amount = st.number_input("Loan Amount", min_value=0)
-    loan_term = st.selectbox("Loan Amount Term (Months)", ['Select', 12.0, 36.0, 60.0, 84.0, 120.0, 180.0, 240.0, 360.0, 480.0])
+    loan_term = st.selectbox("Loan Amount Term (Months)", ['Select', 'less than 60', 'Between 60 and 120', 'More than 120'])
     credit_history = st.selectbox("Credit History", ['Select', "Good", "Poor"])
     property_area = st.selectbox("Property Area", ['Select', 'Urban', 'Semiurban', 'Rural'])
 
@@ -62,14 +62,15 @@ elif loan_amount > 150000:
     loan_amount = 'High'
 
 # Converting loan term to category
-if loan_term < 60:
+if loan_term == 'less than 60':
     loan_term = 'Short'
 
-elif loan_term <= 120:
+elif loan_term == 'Between 60 and 120':
     loan_term = 'Medium'
 
-elif loan_term > 120:
+elif loan_term == 'More than 120':
     loan_term = 'Long'
+
 
 if submit_btn:
     # Check for missing fields
