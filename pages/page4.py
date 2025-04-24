@@ -21,9 +21,10 @@ col4,col5,col6,col7 = st.columns(4)
 with col4: 
     pass
 with col5:
-    st.subheader("Entwan Enkhbayar",anchor=False)
+    #st.subheader("Entwan Enkhbayar",anchor=False)
     st.markdown(
                 f"""
+            <h3 style="text-align: left; margin-bottom: 0;">Entwan Enkhbayar</h3>
             <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 20px;">
                 <a href="https://github.com/Enkhamgalan1230" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
@@ -40,9 +41,10 @@ with col5:
             unsafe_allow_html=True
         )
 with col6:
-    st.subheader("Muneef Mumthas", anchor=False)
+    #st.subheader("Muneef Mumthas", anchor=False)
     st.markdown(
                 f"""
+            <h3 style="text-align: left; margin-bottom: 0;">Entwan Enkhbayar</h3>
             <div style="display: flex; justify-content: right; align-items: center; text-align: center; margin-top: 20px;">
                 <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
