@@ -25,7 +25,6 @@ with col1:
 with col2:
     with cont1:
         st.subheader("Entwan")
-        st.write("Hi I am Mongolian")
         st.markdown(
             f"""
             <div style="display: flex; justify-content: left; align-items: center; text-align: center; margin-top: 10px;">
@@ -43,14 +42,13 @@ with col2:
 with col3:
     with cont2:
         st.subheader("Muneef")
-        st.write("Yo straight outta Sri Lanka")
         st.markdown(
             f"""
             <div style="display: flex; justify-content: center; align-items: center; text-align: center; margin-top: 10px;">
                 <a href="https://github.com/MuneefMumthas" target="_blank" style="text-decoration: none;">
                     <img src="data:image/png;base64,{git}" 
                         alt="github" 
-                        style="width: 50px; height: auto; cursor: pointer; transition: transform 0.3s ease-in-out;">
+                        style="width: 100px; height: 100px; cursor: pointer; transition: transform 0.3s ease-in-out;">
                 </a>
             </div>
             """,
