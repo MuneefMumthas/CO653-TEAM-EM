@@ -123,7 +123,7 @@ if st.session_state.test_submitted:
         dependents_encoded_df = pd.DataFrame(
             dependents_array,
             columns=encoder_onehot.get_feature_names_out(["Dependents"]),
-            index=encoded_df_scaled.index  # To preserve row alignment
+            index=encoded_df_scaled.index 
         )
 
         # Dropping the original "Dependents" column and concatenate one-hot version
@@ -194,7 +194,7 @@ if st.session_state.test_encoded:
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
             st.info(f"📊 Prediction Score: **{prediction_percentage}**")
         st.markdown("---")
-        
+
         with expander2("How to read prediction score?"):
             st.subheader("Class mapping", anchor=False)
             st.write("1.Prediction Score greater than 75:  More likely to be :green[approved]")
