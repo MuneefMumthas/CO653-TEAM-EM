@@ -6,8 +6,7 @@ import tensorflow as tf
 from st_circular_progress import CircularProgress
 import time
 
-# Load Trained Models and Encoders
-model = tf.keras.models.load_model("pages/pkl/best_model.h5")
+# Loading the Encoders
 mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
 minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
 label_encoder = joblib.load("pages/pkl/label_encoder.pkl")
@@ -22,6 +21,7 @@ if "encoded_data" not in st.session_state:
 
 from rules import rules
 
+# evaluating fuzzy rules
 def evaluate_fuzzy_rules(input_row, rules):
     best_match = None
     max_score = 0
@@ -87,7 +87,7 @@ elif credit_history == "Poor":
     credit_history = 0.0
 
 if submit_btn:
-    # Check for missing fields
+    # Checking for missing fields
     fields = {
         "Gender": gender, "Married": married, "Dependents": dependents,
         "Education": education, "Self_Employed": self_employed,
@@ -135,7 +135,7 @@ if st.session_state.test_submitted:
     if st.button("Encode & Scale"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-        # Define columns to scale
+        # Defining columns to scale
         columns_for_scaling = [
             'ApplicantIncome',
             'CoapplicantIncome',
@@ -144,38 +144,36 @@ if st.session_state.test_submitted:
             'Loan_Amount_Term'
         ]
 
-        # Scale only selected columns
+        # Scaling only selected columns
         scaled_values = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
-        # Replace original columns with scaled values
+        # Replacing original columns with scaled values
         encoded_df_scaled = encoded_df.copy()
         encoded_df_scaled[columns_for_scaling] = scaled_values
 
-        # Save to session state or display
+        # Saving to session state or display
         st.session_state.encoded_data = encoded_df_scaled
 
-        # One-hot encode Dependents column
+        # One-hot encoding the Dependents column
         dependents_array = encoder_onehot.transform(encoded_df_scaled[["Dependents"]])
-
-        # Convert to DataFrame with column names like 'Dependents_0', 'Dependents_1', etc.
         dependents_encoded_df = pd.DataFrame(
             dependents_array,
             columns=encoder_onehot.get_feature_names_out(["Dependents"]),
-            index=encoded_df_scaled.index  # To preserve row alignment
+            index=encoded_df_scaled.index
         )
 
-        # Drop the original "Dependents" column and concatenate one-hot version
+        # Dropping the original "Dependents" column and concatenate one-hot version
         final_df = encoded_df_scaled.drop(columns=["Dependents"])
         final_df = pd.concat([final_df, dependents_encoded_df], axis=1)
 
-        # Save to session and display
+        # Saving to session and display
         st.session_state.encoded_data = final_df
         
         st.session_state.test_encoded = True
 
         st.dataframe(st.session_state.encoded_data)
 
-        # Save to session and display
+        # Saving to session and display
         st.session_state.encoded_data = final_df
         st.session_state.test_encoded = True
 

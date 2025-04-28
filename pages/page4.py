@@ -10,14 +10,13 @@ def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-# Convert image to Base64
-
+# Converting image to Base64
 git = get_base64_image(git_logo_url)
 linkedin = get_base64_image(linkedin)
 email = get_base64_image(email)
 st.title("Authors")
 
-# Create two side-by-side columns
+# Creating two side-by-side columns for the authors' information
 col1, col2 = st.columns(2)
 
 with col1:

@@ -6,7 +6,7 @@ import tensorflow as tf
 from st_circular_progress import CircularProgress
 import time
 
-# Load Trained Models and Encoders
+# Loading Trained Models and Encoders
 model = tf.keras.models.load_model("pages/pkl/best_model.h5")
 mestimate_encoder = joblib.load("pages/pkl/mestimate_encoder.pkl")
 minmax_scaler = joblib.load("pages/pkl/minmax_scaler.pkl")
@@ -50,6 +50,7 @@ elif credit_history == "Poor":
     credit_history = 0.0
 
 if submit_btn:
+
     # Check for missing fields
     fields = {
         "Gender": gender, "Married": married, "Dependents": dependents,
@@ -98,7 +99,7 @@ if st.session_state.test_submitted:
     if st.button("Encode & Scale"):
         encoded_df = mestimate_encoder.transform(st.session_state.test_input)
 
-        # Define columns to scale
+        # Defining columns to scale
         columns_for_scaling = [
             'ApplicantIncome',
             'CoapplicantIncome',
@@ -107,31 +108,29 @@ if st.session_state.test_submitted:
             'Loan_Amount_Term'
         ]
 
-        # Scale only selected columns
+        # Scaling only selected columns
         scaled_values = minmax_scaler.transform(encoded_df[columns_for_scaling])
 
-        # Replace original columns with scaled values
+        # Replacing original columns with scaled values
         encoded_df_scaled = encoded_df.copy()
         encoded_df_scaled[columns_for_scaling] = scaled_values
 
-        # Save to session state or display
+        # Saving to session state or display
         st.session_state.encoded_data = encoded_df_scaled
 
-        # One-hot encode Dependents column
+        # One-hot encoding the Dependents column
         dependents_array = encoder_onehot.transform(encoded_df_scaled[["Dependents"]])
-
-        # Convert to DataFrame with column names like 'Dependents_0', 'Dependents_1', etc.
         dependents_encoded_df = pd.DataFrame(
             dependents_array,
             columns=encoder_onehot.get_feature_names_out(["Dependents"]),
             index=encoded_df_scaled.index  # To preserve row alignment
         )
 
-        # Drop the original "Dependents" column and concatenate one-hot version
+        # Dropping the original "Dependents" column and concatenate one-hot version
         final_df = encoded_df_scaled.drop(columns=["Dependents"])
         final_df = pd.concat([final_df, dependents_encoded_df], axis=1)
 
-        # Save to session and display
+        # Saving to session and display
         st.session_state.encoded_data = final_df
         
         st.session_state.test_encoded = True
@@ -142,16 +141,17 @@ if st.session_state.test_encoded:
 
     st.subheader("Predict Loan Status", anchor=False)
     if st.button("Predict"):
-        # Prepare input for prediction
+        # Preparing input for prediction
         X_test = st.session_state.encoded_data.copy()
         
         st.session_state.prediction_score = model.predict(X_test)
 
         prediction_score = st.session_state.prediction_score
+
         # probability for prediction
         prediction_label = (prediction_score > 0.5).astype(int)
 
-        # Decode prediction as label_encoder was used during training
+        # Decoding prediction as label_encoder was used during training
         predicted_class = label_encoder.inverse_transform(prediction_label.reshape(-1))[0]
 
         #class mapping
@@ -175,16 +175,17 @@ if st.session_state.test_encoded:
         expander2 = st.expander
 
         prediction_percentage = int(round(prediction_score[0][0] * 100, 2))
-        # Display prediction result
+
+        # Displaying  prediction result
         st.markdown("---")
-        unique_key = f"my_circular_progress_{int(time.time() * 1000)}"  # key changes every millisecond
+        unique_key = f"my_circular_progress_{int(time.time() * 1000)}" 
 
         my_circular_progress = CircularProgress(
             label="Prediction Score",
             value=prediction_percentage,
             size="Large",
             color=progress_colour,
-            key=unique_key  # this will force Streamlit to re-render it fully
+            key=unique_key  # this will force Streamlit to re-render it fully after each run
         ).st_circular_progress()
 
         
@@ -192,12 +193,8 @@ if st.session_state.test_encoded:
 
         with expander1(f"🔮 Prediction: **{predicted_lable}**"):
             st.info(f"📊 Prediction Score: **{prediction_percentage}**")
-        #st.success(f"🔮 Prediction: **{predicted_lable}**")
-        #st.info(f"📊 Prediction Score: **{prediction_score[0][0]:.2f}**")
-        #st.balloons()
-        #st.write("Note: The prediction score is a probability value between 0 and 1. " \
-        #"A score above 0.5 indicates a positive prediction (Loan being Approved), while a score below 0.5 indicates a negative prediction (Loan being Rejected).")
         st.markdown("---")
+        
         with expander2("How to read prediction score?"):
             st.subheader("Class mapping", anchor=False)
             st.write("1.Prediction Score greater than 75:  More likely to be :green[approved]")

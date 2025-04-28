@@ -5,12 +5,13 @@ import base64
 
 
 st.set_page_config(
-    page_title="LoanEM",  # Set the title in the navigation bar
-    page_icon="🏦",  # Set a custom icon (optional)
-    layout="wide"  # Optionally, set layout to 'wide' or 'centered'
+    page_title="LoanEM", 
+    page_icon="🏦",
+    layout="wide" 
 )
 
-# Page Setup
+
+# Page Configuration
 
 home_page = st.Page(
     page = "pages/page1.py",
@@ -30,25 +31,19 @@ fuzzy = st.Page(
     icon = "📝"
 )
 
-outcome = st.Page(
+Authors = st.Page(
     page = "pages/page4.py",
     title= "Authors",
     icon = "🫂"
 )
 
-fuz = st.Page(
-    page = "pages/fuzzy.py",
-    title= "Fuzzy",
-    icon = "📝"
-)
 
-
-
+# Sidebar Navigation
 pg = st.navigation(
     {
         "Info": [home_page],
         "Models":[nn,fuzzy],
-        "Comparison": [outcome]
+        "Comparison": [Authors]
     }
 )
 
@@ -56,8 +51,6 @@ st.sidebar.header("Team Members")
 st.sidebar.write("- **Enkh-Amgalan Enkhbayar (22135347)**")
 st.sidebar.write("- **Muneef Ahamed Mohamed Mumthas (22206529)**")
 
-
-#st.logo("assets/logo_longer_white.png",icon_image="assets/logo.png", size= "large")
 
 pg.run()
 
