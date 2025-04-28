@@ -31,7 +31,7 @@ fuzzy = st.Page(
     icon = "📝"
 )
 
-Authors = st.Page(
+author_details = st.Page(
     page = "pages/page4.py",
     title= "Authors",
     icon = "🫂"
@@ -43,7 +43,7 @@ pg = st.navigation(
     {
         "Info": [home_page],
         "Models":[nn,fuzzy],
-        "Comparison": [Authors]
+        "Comparison": [author_details]
     }
 )
 
