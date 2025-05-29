@@ -18,7 +18,7 @@ st.markdown("---")
 st.header("Methodology", anchor=False)
 st.write(
     "Our methodology involves first training the neural network to its optimal performance. "
-    "We initially developed the model using the dataset, then iteratively tweaked hyperparameters and layer configurations to improve performance. "
+    "We initially developed the model using the dataset, then iteratively tweaked hyperparameters, pre-processing steps and layer configurations to improve performance. "
     "Once a satisfactory level was achieved, the final model was selected based on its performance across validation and test sets."
 )
 st.write(
@@ -28,7 +28,7 @@ st.write(
 )
 
 st.write(
-    "Instead of combining the neural network and fuzzy logic into a hybrid model, we used the same feature-engineered variables to build robust models independently. "
+    "With both neural network and fuzzy logic models we created, we used the same feature-engineered variables to build robust models independently. "
     "This approach allowed us to leverage the learning capabilities of the neural network and the interpretability of fuzzy logic separately, while maintaining consistency across both systems."
 )
 
