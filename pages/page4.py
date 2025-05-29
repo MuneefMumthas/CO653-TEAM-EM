@@ -84,7 +84,7 @@ with col2:
                         alt="LinkedIn" 
                         style="width: 50px; height: 50px; border-radius: 10px;">
                 </a>
-                <a href="mailto:muneefmumthas1431@gmail.com">
+                <a href="mailto:muneef.mumthas@outlook.com">
                     <img src="data:image/png;base64,{email}" 
                         alt="Email" 
                         style="width: 50px; height: 50px; border-radius: 10px;">
