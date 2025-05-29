@@ -17,18 +17,19 @@ st.write(
 st.markdown("---")
 st.header("Methodology", anchor=False)
 st.write(
-    "Our methodology involves first training the neural network to its optimal performance."
-    "Once the neural network has been trained, we will review the importance scores assigned to the various inputs during the training process." 
-    "These importance scores help us identify which features have the most influence on the model's predictions."
+    "Our methodology involves first training the neural network to its optimal performance. "
+    "We initially developed the model using the dataset, then iteratively tweaked hyperparameters and layer configurations to improve performance. "
+    "Once a satisfactory level was achieved, the final model was selected based on its performance across validation and test sets."
 )
 st.write(
-"Using the information from the importance scores, we will then create rules for the fuzzy logic system. These rules will be designed to align with the decision-making process of the neural network, "
-"enabling the fuzzy logic system to approximate the neural network's behaviour. At the same time, the fuzzy logic component will handle uncertainty and imprecision in the input data."
+    "To enhance interpretability, we then created a fuzzy logic system by extracting rules from a trained decision tree classifier. "
+    "The decision tree was optimised using grid search with the final configuration: criterion='gini', max_depth=None, max_features=None, min_samples_leaf=1, and min_samples_split=2. "
+    "This allowed the tree to fully capture feature interactions. We traversed the decision paths to extract rules in the form of (feature, operator, threshold) with predicted classes, along with fuzzy confidence scores and sample support."
 )
 
 st.write(
-"By combining the neural network and fuzzy logic, we aim to create a robust hybrid model that leverages the learning capabilities of the neural network and the interpretability of fuzzy logic, resulting in a more adaptable and effective solution."
-
+    "Instead of combining the neural network and fuzzy logic into a hybrid model, we used the same feature-engineered variables to build robust models independently. "
+    "This approach allowed us to leverage the learning capabilities of the neural network and the interpretability of fuzzy logic separately, while maintaining consistency across both systems."
 )
 
 st.markdown("---")
